@@ -1,0 +1,10 @@
+#
+# DEP-12: Per-package machine-readable metadata about Upstream
+#        Please check * https://dep-team.pages.debian.net/deps/dep12/
+#                     * https://wiki.debian.org/UpstreamMetadata
+Bug-Database: "https://github.com/wasix-org/wasix-libc/issues"
+Bug-Submit: "https://github.com/wasix-org/wasix-libc/issues/new"
+Documentation: "https://wasix.org/docs"
+Other-References: "https://wasix.org/"
+Repository: "https://github.com/wasix-org/wasix-libc.git"
+Repository-Browse: "https://github.com/wasix-org/wasix-libc"

@@ -1,0 +1,33 @@
+Source: wasix-libc
+Section: devel
+Priority: optional
+Maintainer: Fukui Daichi <a.dog.will.talk@akane.waseda.jp>
+Build-Depends: debhelper-compat (= 13), clang-16, llvm-16
+Standards-Version: 4.6.2
+Homepage: https://github.com/wasix-org/wasix-libc
+Rules-Requires-Root: no
+
+Package: wasix-libc
+Architecture: any
+Multi-Arch: foreign
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: wasix libc implementation for WebAssembly
+ This fork of wasi-libc extends libc with the missing functionality needed to
+ build complete and useful applications, in particular it incorporates these
+ additional extensions:
+  - full support for efficient multithreading including joins, signals
+    and `getpid`
+  - `pthreads` support (now extended from the WASI threads spec)
+  - full support for sockets (`socket`, `bind`, `connect`, `resolve`)
+      - IPv4, IPv6
+      - UDP, TCP
+      - Multicast, Anycast
+      - RAW sockets
+  - current directory support (`chdir`) integrated with the runtime
+  - `setjmp` / `longjmp` support (used extensively in `libc` ) via `asyncify`
+  - process forking (`fork` and `vfork` )
+  - subprocess spawning and waiting (`exec` , `wait` )
+  - TTY support
+  - asynchronous polling of sockets and files
+  - pipe and event support (`pipe`, `event` )
+  - DNS resolution support (`resolve` )

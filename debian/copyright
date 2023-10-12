@@ -1,0 +1,463 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: wasix-libc
+Upstream-Contact: Johnathan Sharratt <johnathan.sharratt@gmail.com>
+Source: https://github.com/wasix-org/wasix-libc
+
+Files: *
+Copyright:
+ 2020 Albert Cervin <albert@acervin.com>
+ 2020-2021 Alex Crichton <alex@alexcrichton.com>
+ 2023 Alex Crichton <alex@alexcrichton.com>
+ 2022-2023 Andrew Brown <andrew.brown@intel.com>
+ 2023 Arshia Ghafoori <arshia001@live.com>
+ 2023 Arshia001 <Arshia001@users.noreply.github.com>
+ 2021 Ayke van Laethem <aykevanlaethem@gmail.com>
+ 2022 Bernhard M. Wiedemann <githubbmw2020@lsmod.de>
+ 2023 Catherine <whitequark@whitequark.org>
+ 2021-2023 Cheng Shao <astrohavoc@gmail.com>
+ 2023 Christoph Herzog <chris@theduke.at>
+ 2018-2022 Dan Gohman <sunfish@mozilla.com>
+ 2020 Daniel Bevenius <daniel.bevenius@gmail.com>
+ 2019 Dimitrii Nemkov <xeqlol@gmail.com>
+ 2019 Frank Denis <github@pureftpd.org>
+ 2020 Gabor Greif <ggreif@gmail.com>
+ 2021 Gerd Stolpmann <gerd@figlyinc.com>
+ 2022 Harald Hoyer <harald@profian.com>
+ 2019 Jakub Konka <jakub.konka@golem.network>
+ 2019 Jakub Konka <kubkon@jakubkonka.com>
+ 2022 John Ericson <John.Ericson@Obsidian.Systems>
+ 2022-2023 Johnathan Sharratt <johnathan.sharratt@gmail.com>
+ 2022 Marcin Kolny <marcin.kolny@gmail.com>
+ 2022-2023 Marcin Kolny <mkolny@amazon.com>
+ 2021-2023 Mike Hommey <mh@glandium.org>
+ 2020 Olaf Tomalka <olaf.tomalka@gmail.com>
+ 2020 Pat Hickey <pat@moreproductive.org>
+ 2019-2020 Pat Hickey <phickey@fastly.com>
+ 2018,2022 Petr Penzin <petr.penzin@intel.com>
+ 2023 Pier Angelo Vendrame <PieroV@users.noreply.github.com>
+ 2023 Reagan Bohan <xbjfk.github@gmail.com>
+ 2022 Roman Volosatovs <rvolosatovs@riseup.net>
+ 2023 Rudra <r82941037@gmail.com>
+ 2019-2020 Sam Clegg <sbc@chromium.org>
+ 2023 Sam Clegg <sbc@chromium.org>
+ 2023 Sander Vocke <sandervocke@gmail.com>
+ 2022 Shengyun Zhou <GGGZ-1101-28@live.cn>
+ 2023 Syrus Akbary <me@syrusakbary.com>
+ 2019 Till Schneidereit <till@tillschneidereit.net>
+ 2021 Vitali Lovich <vlovich+github@gmail.com>
+ 2022-2023 YAMAMOTO Takashi <yamamoto@midokura.com>
+ 2022 Yuta Saito <kateinoigakukun@gmail.com>
+ 2021 Zheng Luo <vicluo96@gmail.com>
+ 2019 eliasbenali <42192494+eliasbenali@users.noreply.github.com>
+ 2023 ptitSeb <sebastien.chev@gmail.com>
+ 2019-2020 vms <michail.vms@gmail.com>
+ 2019 vms <michail.vms@yandex.ru>
+ 2023 wayne warren <wayne.warren.s@gmail.com>
+ 2020 whitequark <whitequark@whitequark.org>
+ 2022 韩朴宇 <w12101111@gmail.com>
+License: Apache-2.0 and Apache-2.0-with-LLVM-Exceptions and Expat
+Comment:
+ wasi-libc as a whole is multi-licensed under the
+ Apache License v2.0 with LLVM Exceptions, the Apache License v2.0, and
+ the MIT License.
+ .
+ wasi-libc changes to these files are multi-licensed under the
+ Apache License v2.0 with LLVM Exceptions, the Apache License v2.0,
+ the MIT License, and the original licenses of the third-party works.
+ .
+ wasix-libc is considered changes to wasi-libc files, so files
+ for wasix-libc are also multi-licensed under the licenses.
+
+Files: dlmalloc/include/unistd.h
+       dlmalloc/src/dlmalloc.c
+       dlmalloc/src/malloc.c
+Copyright: n/a
+License: public-domain
+ This is a version (aka dlmalloc) of malloc/free/realloc written by
+ Doug Lea and released to the public domain, as explained at
+ http://creativecommons.org/publicdomain/zero/1.0/ Send questions,
+ comments, complaints, performance data, etc to dl@cs.oswego.edu
+
+Files: libc-top-half/musl/*
+Copyright: 2005-2020 Rich Felker <dalias@aerifal.cx>
+           2005-2020 Many other contributors
+License: Expat
+
+Files: tools/wasi-headers/*
+Copyright:
+ 2018-2020 Dan Gohman <sunfish@mozilla.com>
+ 2018-2020 wasi-libc contributors
+License: Apache-2.0
+
+Files: debian/*
+Copyright: 2023 Fukui Daichi <a.dog.will.talk@akane.waseda.jp>
+License: Expat
+
+Files: libc-bottom-half/cloudlibc/*
+Copyright: 2015-2017 Nuxi, https://nuxi.nl/
+License:   BSD-2-Clause
+
+Files:     libc-top-half/musl/src/math/__cosdf.c
+           libc-top-half/musl/src/math/__rem_pio2f.c
+           libc-top-half/musl/src/math/__sindf.c
+           libc-top-half/musl/src/math/acosf.c
+           libc-top-half/musl/src/math/asinf.c
+           libc-top-half/musl/src/math/atan.c
+           libc-top-half/musl/src/math/atan2f.c
+           libc-top-half/musl/src/math/atanf.c
+           libc-top-half/musl/src/math/atanl.c
+           libc-top-half/musl/src/math/cbrt.c
+           libc-top-half/musl/src/math/cbrtf.c
+           libc-top-half/musl/src/math/cbrtl.c
+           libc-top-half/musl/src/math/cos.c
+           libc-top-half/musl/src/math/cosf.c
+           libc-top-half/musl/src/math/erf.c
+           libc-top-half/musl/src/math/erff.c
+           libc-top-half/musl/src/math/erfl.c
+           libc-top-half/musl/src/math/expm1.c
+           libc-top-half/musl/src/math/expm1f.c
+           libc-top-half/musl/src/math/j0f.c
+           libc-top-half/musl/src/math/j1f.c
+           libc-top-half/musl/src/math/jnf.c
+           libc-top-half/musl/src/math/lgammaf_r.c
+           libc-top-half/musl/src/math/lgammal.c
+           libc-top-half/musl/src/math/log10f.c
+           libc-top-half/musl/src/math/log1p.c
+           libc-top-half/musl/src/math/log1pf.c
+           libc-top-half/musl/src/math/scalbf.c
+           libc-top-half/musl/src/math/sin.c
+           libc-top-half/musl/src/math/sincos.c
+           libc-top-half/musl/src/math/sincosf.c
+           libc-top-half/musl/src/math/sinf.c
+           libc-top-half/musl/src/math/tan.c
+           libc-top-half/musl/src/math/tanf.c
+Copyright: 1993 Sun Microsystems, Inc.
+           2009-2011 Bruce D. Evans, Steven G. Kargl, David Schultz.
+License:   Permissive-SunPro
+ Developed at SunPro, a Sun Microsystems, Inc. business.
+ Permission to use, copy, modify, and distribute this
+ software is freely granted, provided that this notice
+ is preserved.
+
+Files:     libc-top-half/musl/src/math/exp.c
+           libc-top-half/musl/src/math/exp2.c
+           libc-top-half/musl/src/math/exp2f.c
+           libc-top-half/musl/src/math/exp2f_data.c
+           libc-top-half/musl/src/math/exp2f_data.h
+           libc-top-half/musl/src/math/exp_data.c
+           libc-top-half/musl/src/math/exp_data.h
+           libc-top-half/musl/src/math/expf.c
+           libc-top-half/musl/src/math/log.c
+           libc-top-half/musl/src/math/log2.c
+           libc-top-half/musl/src/math/log2_data.c
+           libc-top-half/musl/src/math/log2_data.h
+           libc-top-half/musl/src/math/log2f.c
+           libc-top-half/musl/src/math/log2f_data.c
+           libc-top-half/musl/src/math/log2f_data.h
+           libc-top-half/musl/src/math/log_data.c
+           libc-top-half/musl/src/math/log_data.h
+           libc-top-half/musl/src/math/logf.c
+           libc-top-half/musl/src/math/logf_data.c
+           libc-top-half/musl/src/math/logf_data.h
+           libc-top-half/musl/src/math/pow.c
+           libc-top-half/musl/src/math/pow_data.c
+           libc-top-half/musl/src/math/pow_data.h
+           libc-top-half/musl/src/math/powf.c
+           libc-top-half/musl/src/math/powf_data.c
+           libc-top-half/musl/src/math/powf_data.h
+Copyright: 2017-2018 Arm Limited
+License:   Expat
+
+Files:     libc-top-half/musl/src/setjmp/x32/longjmp.s
+           libc-top-half/musl/src/setjmp/x32/setjmp.s
+           libc-top-half/musl/src/setjmp/x86_64/longjmp.s
+           libc-top-half/musl/src/setjmp/x86_64/setjmp.s
+           libc-top-half/musl/src/thread/x32/__unmapself.s
+           libc-top-half/musl/src/thread/x32/__set_thread_area.s
+           libc-top-half/musl/src/thread/x86_64/__unmapself.s
+           libc-top-half/musl/src/thread/x86_64/__set_thread_area.s
+Copyright: 2011-2012 Nicholas J. Kain
+License:   Expat
+
+Files:     libc-top-half/musl/src/math/__cos.c
+           libc-top-half/musl/src/math/__cosl.c
+           libc-top-half/musl/src/math/__rem_pio2.c
+           libc-top-half/musl/src/math/__rem_pio2_large.c
+           libc-top-half/musl/src/math/__rem_pio2l.c
+           libc-top-half/musl/src/math/__sin.c
+           libc-top-half/musl/src/math/__sinl.c
+           libc-top-half/musl/src/math/acos.c
+           libc-top-half/musl/src/math/acosl.c
+           libc-top-half/musl/src/math/asin.c
+           libc-top-half/musl/src/math/asinl.c
+           libc-top-half/musl/src/math/atan2.c
+           libc-top-half/musl/src/math/atan2l.c
+           libc-top-half/musl/src/math/j0.c
+           libc-top-half/musl/src/math/j1.c
+           libc-top-half/musl/src/math/jn.c
+           libc-top-half/musl/src/math/lgamma_r.c
+           libc-top-half/musl/src/math/log10.c
+           libc-top-half/musl/src/math/scalb.c
+Copyright: 1993 Sun Microsystems, Inc.
+           2008 Steven G. Kargl, David Schultz, Bruce D. Evans.
+License:   Permissive-SunSoft
+ Developed at SunSoft, a Sun Microsystems, Inc. business.
+ Permission to use, copy, modify, and distribute this
+ software is freely granted, provided that this notice
+ is preserved.
+
+Files:     libc-bottom-half/cloudlibc/src/include/_/cdefs.h
+           libc-top-half/musl/src/complex/__cexp.c
+           libc-top-half/musl/src/complex/__cexpf.c
+           libc-top-half/musl/src/complex/cexp.c
+           libc-top-half/musl/src/complex/cexpf.c
+           libc-top-half/musl/src/complex/csqrt.c
+           libc-top-half/musl/src/complex/csqrtf.c
+           libc-top-half/musl/src/math/exp2l.c
+           libc-top-half/musl/src/math/fmaf.c
+           libc-top-half/musl/src/math/fmal.c
+Copyright: 2005-2011 David Schultz <das@FreeBSD.ORG>
+           2015-2017 Nuxi, https://nuxi.nl/
+License:   BSD-2-Clause
+
+Files:     libc-top-half/musl/src/complex/ccosh.c
+           libc-top-half/musl/src/complex/ccoshf.c
+           libc-top-half/musl/src/complex/csinh.c
+           libc-top-half/musl/src/complex/csinhf.c
+           libc-top-half/musl/src/complex/ctanh.c
+           libc-top-half/musl/src/complex/ctanhf.c
+Copyright: Copyright (c) 2005 Bruce D. Evans and Steven G. Kargl
+           Copyright (c) 2011 David Schultz
+License:   Permissive-copyright-notice-unmodified
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+ notice unmodified, this list of conditions, and the following
+ disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+ notice, this list of conditions and the following disclaimer in the
+ documentation and/or other materials provided with the distribution.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+ IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Files:     libc-top-half/musl/src/math/__tan.c
+           libc-top-half/musl/src/math/__tandf.c
+           libc-top-half/musl/src/math/__tanl.c
+Copyright: 2004 Sun Microsystems, Inc.
+           2008 Steven G. Kargl, David Schultz, Bruce D. Evans.
+License:   Permissive-Simple
+ Permission to use, copy, modify, and distribute this
+ software is freely granted, provided that this notice
+ is preserved.
+
+Files:     libc-top-half/musl/src/regex/regcomp.c
+           libc-top-half/musl/src/regex/regexec.c
+           libc-top-half/musl/src/regex/tre.h
+Copyright: 2001-2009 Ville Laurikari <vl@iki.fi>
+License:   BSD-2-Clause
+
+Files:     libc-top-half/musl/src/complex/catanl.c
+           libc-top-half/musl/src/math/log1pl.c
+           libc-top-half/musl/src/math/__polevll.c
+           libc-top-half/musl/src/math/powl.c
+           libc-top-half/musl/src/complex/catanf.c
+           libc-top-half/musl/src/math/tgammal.c
+           libc-top-half/musl/src/math/logl.c
+           libc-top-half/musl/src/math/log10l.c
+           libc-top-half/musl/src/math/expm1l.c
+           libc-top-half/musl/src/math/expl.c
+           libc-top-half/musl/src/complex/catan.c
+           libc-top-half/musl/src/math/log2l.c
+Copyright: 2008 Stephen L. Moshier <steve@moshier.net>
+License:   ISC
+ Permission to use, copy, modify, and distribute this software for any
+ purpose with or without fee is hereby granted, provided that the above
+ copyright notice and this permission notice appear in all copies.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+Files:     libc-top-half/musl/src/stdlib/qsort.c
+Copyright: 2011 Valentin Ochs
+License:   Expat
+
+Files:     libc-top-half/musl/src/crypt/crypt_blowfish.c
+Copyright: 1998-2014 Solar Designer
+License:   Permissive-with-credit
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted.
+ .
+ There's ABSOLUTELY NO WARRANTY, express or implied.
+ .
+ It is my intent that you should be able to use this on your system,
+ as part of a software package, or anywhere else to improve security,
+ ensure compatibility, or for any other purpose.  I would appreciate
+ it if you give credit where it is due and keep your modifications in
+ the public domain as well, but I don't require that in order to let
+ you place this code and any modifications you make under a license
+ of your choice.
+ .
+ This implementation is fully compatible with OpenBSD's bcrypt.c for prefix
+ "$2b$", originally by Niels Provos <provos at citi.umich.edu>, and it uses
+ some of his ideas.  The password hashing algorithm was designed by David
+ Mazieres <dm at lcs.mit.edu>.  For information on the level of
+ compatibility for bcrypt hash prefixes other than "$2b$", please refer to
+
+Files:     libc-top-half/musl/src/include/uthash.h
+Copyright: 2003-2022 Troy D. Hanson
+License:   Permissive
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ .
+ * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+ IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+ OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Files:     emmalloc/emmalloc.c
+Copyright: 2018 The Emscripten Authors.
+License:   Expat
+
+Files:     libc-top-half/musl/src/string/aarch64/memset.S
+Copyright: 2012-2020 Arm Limited.
+License:   Expat
+
+Files:     libc-top-half/musl/src/string/aarch64/memcpy.S
+Copyright: 2012-2020 Arm Limited.
+License:   Expat
+
+Files:     libc-top-half/musl/src/regex/tre-mem.c
+Copyright: 2001-2009 Ville Laurikari <vl@iki.fi>
+License:   BSD-2-Clause
+
+Files:     libc-top-half/musl/src/crypt/crypt_md5.c
+Copyright: 2003 Poul-Henning Kamp
+License:   BSD-2-Clause
+
+Files:     libc-top-half/musl/src/string/arm/memcpy.S
+Copyright: 2008 The Android Open Source Project
+License:   BSD-2-Clause
+
+Files:     libc-top-half/musl/src/crypt/crypt_des.c
+Copyright: Copyright (c) 1994 David Burren
+           Copyright (c) 2000,2002,2010,2012 Solar Designer
+License:   BSD-3-Clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+ notice, this list of conditions and the following disclaimer in the
+ documentation and/or other materials provided with the distribution.
+ 3. Neither the name of the author nor the names of other contributors
+ may be used to endorse or promote products derived from this software
+ without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+
+License:   BSD-2-Clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright
+ notice, this list of conditions and the following disclaimer in
+ the documentation and/or other materials provided with the
+ distribution.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
+ OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+ AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+
+License: Apache-2.0-with-LLVM-Exceptions
+ See /usr/share/common-licenses/Apache-2.0 for the complete license text of the
+ Apache-2.0 license.
+ .
+ As an exception, if, as a result of your compiling your source code, portions
+ of this Software are embedded into an Object form of such source code, you
+ may redistribute such embedded portions in such Object form without complying
+ with the conditions of Sections 4(a), 4(b) and 4(d) of the License.
+ .
+ In addition, if you combine or link compiled forms of this Software with
+ software that is licensed under the GPLv2 ("Combined Software") and if a
+ court of competent jurisdiction determines that the patent provision (Section
+ 3), the indemnity provision (Section 9) or other Section of the License
+ conflicts with the conditions of the GPLv2, you may retroactively and
+ prospectively choose to deem waived or otherwise exclude such Section(s) of
+ the License, but only in their entirety and only with respect to the Combined
+ Software.
+
+License: Expat
+ Permission is hereby granted, free of charge, to any
+ person obtaining a copy of this software and associated
+ documentation files (the "Software"), to deal in the
+ Software without restriction, including without
+ limitation the rights to use, copy, modify, merge,
+ publish, distribute, sublicense, and/or sell copies of
+ the Software, and to permit persons to whom the Software
+ is furnished to do so, subject to the following
+ conditions:
+ .
+ The above copyright notice and this permission notice
+ shall be included in all copies or substantial portions
+ of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
+ ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+ TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+ SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+ IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ DEALINGS IN THE SOFTWARE.
+
+License: Apache-2.0
+ Debian systems provide the Apache 2.0 license in
+ /usr/share/common-licenses/Apache-2.0

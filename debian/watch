@@ -1,0 +1,5 @@
+# You must remove unused comment lines for the released package.
+version=4
+opts="mode=git, pgpmode=none" \
+https://salsa.debian.org/dfukui/wasix-libc \
+heads/upstream-orig
