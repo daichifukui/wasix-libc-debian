@@ -1,6 +1,5 @@
-wasix-libc (0.0~git20230922.d0362cb-1) UNRELEASED; urgency=low
+wasix-libc (0.0~git20230922.d0362cb-1) unstable; urgency=low
 
-  * Initial release. Closes: #nnnn
-    <nnnn is the bug number of your ITP>
+  * Initial release. (Closes: #1056052)
 
- -- Fukui Daichi <daichi1.fukui@toshiba.co.jp>  Sat, 07 Oct 2023 04:08:09 +0000
+ -- Fukui Daichi <a.dog.will.talk@akane.waseda.jp>  Sat, 07 Oct 2023 04:08:09 +0000
