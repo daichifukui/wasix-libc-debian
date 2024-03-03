@@ -1,0 +1,1 @@
+wasix-libc: no-code-sections [usr/lib/*-wasi/*.a]
