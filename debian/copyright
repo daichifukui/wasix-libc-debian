@@ -90,7 +90,7 @@ Copyright:
 License: Apache-2.0
 
 Files: debian/*
-Copyright: 2023 Fukui Daichi <a.dog.will.talk@akane.waseda.jp>
+Copyright: 2023-2024 Fukui Daichi <a.dog.will.talk@akane.waseda.jp>
 License: Expat
 
 Files: libc-bottom-half/cloudlibc/*
