@@ -1,1 +1,4 @@
 wasix-libc: no-code-sections [usr/lib/*-wasi/*.a]
+wasix-libc: package-contains-documentation-outside-usr-share-doc [usr/share/wasm32-wasi/defined-symbols.txt]
+wasix-libc: package-contains-documentation-outside-usr-share-doc [usr/share/wasm32-wasi/predefined-macros.txt]
+wasix-libc: package-contains-documentation-outside-usr-share-doc [usr/share/wasm32-wasi/undefined-symbols.txt]
