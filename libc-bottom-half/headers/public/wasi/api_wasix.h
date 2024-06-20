@@ -2569,6 +2569,30 @@ _Static_assert(sizeof(__wasi_address_family_t) == 1, "witx calculated size");
 _Static_assert(_Alignof(__wasi_address_family_t) == 1, "witx calculated align");
 
 /**
+ * Address family
+ */
+typedef uint8_t __wasi_address_family_ip_t;
+
+/**
+ * Unspecified - this is unused, but this enum must be
+ * backwards-compatible with $address_family
+ */
+#define __WASI_ADDRESS_FAMILY_IP_UNSPEC (UINT8_C(0))
+
+/**
+ * IP v4
+ */
+#define __WASI_ADDRESS_FAMILY_IP_INET4 (UINT8_C(1))
+
+/**
+ * IP v6
+ */
+#define __WASI_ADDRESS_FAMILY_IP_INET6 (UINT8_C(2))
+
+_Static_assert(sizeof(__wasi_address_family_ip_t) == 1, "witx calculated size");
+_Static_assert(_Alignof(__wasi_address_family_ip_t) == 1, "witx calculated align");
+
+/**
  * Represents an unspecified address
  */
 typedef struct __wasi_addr_unspec_t {
@@ -2714,6 +2738,39 @@ _Static_assert(offsetof(__wasi_addr_ip6_t, flow_info1) == 16, "witx calculated o
 _Static_assert(offsetof(__wasi_addr_ip6_t, flow_info0) == 18, "witx calculated offset");
 _Static_assert(offsetof(__wasi_addr_ip6_t, scope_id1) == 20, "witx calculated offset");
 _Static_assert(offsetof(__wasi_addr_ip6_t, scope_id0) == 22, "witx calculated offset");
+
+/**
+ * IPv6 address without flow info and scope ID
+ */
+typedef struct __wasi_addr_ip6_bare_t {
+    uint16_t n0;
+
+    uint16_t n1;
+
+    uint16_t n2;
+
+    uint16_t n3;
+
+    uint16_t h0;
+
+    uint16_t h1;
+
+    uint16_t h2;
+
+    uint16_t h3;
+
+} __wasi_addr_ip6_bare_t;
+
+_Static_assert(sizeof(__wasi_addr_ip6_bare_t) == 16, "witx calculated size");
+_Static_assert(_Alignof(__wasi_addr_ip6_bare_t) == 2, "witx calculated align");
+_Static_assert(offsetof(__wasi_addr_ip6_bare_t, n0) == 0, "witx calculated offset");
+_Static_assert(offsetof(__wasi_addr_ip6_bare_t, n1) == 2, "witx calculated offset");
+_Static_assert(offsetof(__wasi_addr_ip6_bare_t, n2) == 4, "witx calculated offset");
+_Static_assert(offsetof(__wasi_addr_ip6_bare_t, n3) == 6, "witx calculated offset");
+_Static_assert(offsetof(__wasi_addr_ip6_bare_t, h0) == 8, "witx calculated offset");
+_Static_assert(offsetof(__wasi_addr_ip6_bare_t, h1) == 10, "witx calculated offset");
+_Static_assert(offsetof(__wasi_addr_ip6_bare_t, h2) == 12, "witx calculated offset");
+_Static_assert(offsetof(__wasi_addr_ip6_bare_t, h3) == 14, "witx calculated offset");
 
 /**
  * Unix socket that is bound to no more than 107 bytes
@@ -3108,6 +3165,22 @@ _Static_assert(sizeof(__wasi_addr_t) == 110, "witx calculated size");
 _Static_assert(_Alignof(__wasi_addr_t) == 2, "witx calculated align");
 
 /**
+ * Union of IP addresses
+ */
+typedef union __wasi_addr_ip_u_t {
+    __wasi_addr_unspec_t unspec;
+    __wasi_addr_ip4_t inet4;
+    __wasi_addr_ip6_bare_t inet6;
+} __wasi_addr_ip_u_t;
+typedef struct __wasi_addr_ip_t {
+    uint8_t tag;
+    __wasi_addr_ip_u_t u;
+} __wasi_addr_ip_t;
+
+_Static_assert(sizeof(__wasi_addr_ip_t) == 18, "witx calculated size");
+_Static_assert(_Alignof(__wasi_addr_ip_t) == 2, "witx calculated align");
+
+/**
  * Union that makes a generic IP address and port
  */
 typedef union __wasi_addr_port_u_t {
@@ -3158,61 +3231,6 @@ _Static_assert(offsetof(__wasi_route_t, cidr) == 0, "witx calculated offset");
 _Static_assert(offsetof(__wasi_route_t, via_router) == 28, "witx calculated offset");
 _Static_assert(offsetof(__wasi_route_t, preferred_until) == 144, "witx calculated offset");
 _Static_assert(offsetof(__wasi_route_t, expires_at) == 160, "witx calculated offset");
-
-/**
- * HTTP request handles used to send and receive data to the server
- */
-typedef struct __wasi_http_handles_t {
-    /**
-     * File handle used to write the request data
-     */
-    __wasi_fd_t request;
-
-    /**
-     * File handle used to receive the response data
-     */
-    __wasi_fd_t response;
-
-    /**
-     * File handle used to read the response headers
-     * (entries are separated by line feeds)
-     */
-    __wasi_fd_t headers;
-
-} __wasi_http_handles_t;
-
-_Static_assert(sizeof(__wasi_http_handles_t) == 12, "witx calculated size");
-_Static_assert(_Alignof(__wasi_http_handles_t) == 4, "witx calculated align");
-_Static_assert(offsetof(__wasi_http_handles_t, request) == 0, "witx calculated offset");
-_Static_assert(offsetof(__wasi_http_handles_t, response) == 4, "witx calculated offset");
-_Static_assert(offsetof(__wasi_http_handles_t, headers) == 8, "witx calculated offset");
-
-/**
- * HTTP response status
- */
-typedef struct __wasi_http_status_t {
-    __wasi_bool_t ok;
-
-    __wasi_bool_t redirected;
-
-    /**
-     * Size of the response
-     */
-    __wasi_filesize_t size;
-
-    /**
-     * HTTP status code for this response
-     */
-    uint16_t status;
-
-} __wasi_http_status_t;
-
-_Static_assert(sizeof(__wasi_http_status_t) == 24, "witx calculated size");
-_Static_assert(_Alignof(__wasi_http_status_t) == 8, "witx calculated align");
-_Static_assert(offsetof(__wasi_http_status_t, ok) == 0, "witx calculated offset");
-_Static_assert(offsetof(__wasi_http_status_t, redirected) == 1, "witx calculated offset");
-_Static_assert(offsetof(__wasi_http_status_t, size) == 8, "witx calculated offset");
-_Static_assert(offsetof(__wasi_http_status_t, status) == 16, "witx calculated offset");
 
 /**
  * join flags.
@@ -3865,7 +3883,7 @@ __wasi_errno_t __wasi_proc_fork(
     __wasi_pid_t *retptr0
 ) __attribute__((__warn_unused_result__));
 /**
- * execve()  executes  the  program  referred to by pathname.  This causes the
+ * execv()  executes  the  program  referred to by pathname.  This causes the
  * program that is currently being run by the calling process to  be  replaced
  * with  a  new  program, with newly initialized stack, heap, and (initialized
  * and uninitialized) data segments
@@ -3882,6 +3900,30 @@ _Noreturn void __wasi_proc_exec(
      * (entries are separated by line feeds)
      */
     const char *args
+);
+/**
+ * execve()  executes  the  program  referred to by pathname.  This causes the
+ * program that is currently being run by the calling process to  be  replaced
+ * with  a  new  program, with newly initialized stack, heap, and (initialized
+ * and uninitialized) data segments
+ * 
+ * If the named process does not exist then the process will fail and terminate
+ */
+_Noreturn void __wasi_proc_exec2(
+    /**
+     * Name of the process to be spawned
+     */
+    const char *name,
+    /**
+     * List of the arguments to pass the process
+     * (entries are separated by line feeds)
+     */
+    const char *args,
+    /**
+     * List of the env vars to pass the process
+     * (entries are separated by line feeds)
+     */
+    const char *envs
 );
 /**
  * Spawns a new process within the context of the parent process
@@ -3976,59 +4018,6 @@ __wasi_errno_t __wasi_proc_signal(
      * Signal to send to the thread
      */
     __wasi_signal_t signal
-) __attribute__((__warn_unused_result__));
-/**
- * Connects to a websocket at a particular network URL
- * @return
- * Returns a socket handle which is used to send and receive data
- */
-__wasi_errno_t __wasi_ws_connect(
-    /**
-     * URL of the web socket destination to connect to
-     */
-    const char *url,
-    __wasi_fd_t *retptr0
-) __attribute__((__warn_unused_result__));
-/**
- * Makes a HTTP request to a remote web resource and
- * returns a socket handles that are used to send and receive data
- * @return
- * The body of the response can be streamed from the returned
- * file handle
- */
-__wasi_errno_t __wasi_http_request(
-    /**
-     * URL of the HTTP resource to connect to
-     */
-    const char *url,
-    /**
-     * HTTP method to be invoked
-     */
-    const char *method,
-    /**
-     * HTTP headers to attach to the request
-     * (headers seperated by lines)
-     */
-    const char *headers,
-    /**
-     * Should the request body be compressed
-     */
-    __wasi_bool_t gzip,
-    __wasi_http_handles_t *retptr0
-) __attribute__((__warn_unused_result__));
-/**
- * Retrieves the status of a HTTP request
- */
-__wasi_errno_t __wasi_http_status(
-    /**
-     * Handle of the HTTP request
-     */
-    __wasi_fd_t fd,
-    /**
-     * Pointer to a buffer that will be filled with the current
-     * status of this HTTP request
-     */
-    __wasi_http_status_t * status
 ) __attribute__((__warn_unused_result__));
 /**
  * Securely connects to a particular remote network
@@ -4541,7 +4530,7 @@ __wasi_errno_t __wasi_resolve(
     /**
      * The buffer where addresses will be stored
      */
-    __wasi_addr_t * addrs,
+    __wasi_addr_ip_t * addrs,
     __wasi_size_t naddrs,
     __wasi_size_t *retptr0
 ) __attribute__((__warn_unused_result__));

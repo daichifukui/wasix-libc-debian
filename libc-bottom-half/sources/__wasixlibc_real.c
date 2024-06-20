@@ -320,6 +320,22 @@ _Noreturn void __wasi_proc_exec(
     __imported_wasix_32v1_proc_exec((intptr_t) name, (intptr_t) name_len, (intptr_t) args, (intptr_t) args_len);
 }
 
+_Noreturn void __imported_wasix_32v1_proc_exec2(int32_t arg0, int32_t arg1, int32_t arg2, int32_t arg3, int32_t arg4, int32_t arg5) __attribute__((
+    __import_module__("wasix_32v1"),
+    __import_name__("proc_exec2")
+));
+
+_Noreturn void __wasi_proc_exec2(
+    const char *name,
+    const char *args,
+    const char *envs
+){
+    size_t name_len = strlen(name);
+    size_t args_len = strlen(args);
+    size_t envs_len = strlen(envs);
+    __imported_wasix_32v1_proc_exec2((intptr_t) name, (intptr_t) name_len, (intptr_t) args, (intptr_t) args_len, (intptr_t) envs, (intptr_t) envs_len);
+}
+
 int32_t __imported_wasix_32v1_proc_spawn(int32_t arg0, int32_t arg1, int32_t arg2, int32_t arg3, int32_t arg4, int32_t arg5, int32_t arg6, int32_t arg7, int32_t arg8, int32_t arg9, int32_t arg10, int32_t arg11, int32_t arg12) __attribute__((
     __import_module__("wasix_32v1"),
     __import_name__("proc_spawn")
@@ -393,52 +409,6 @@ __wasi_errno_t __wasi_proc_signal(
     __wasi_signal_t signal
 ){
     int32_t ret = __imported_wasix_32v1_proc_signal((int32_t) pid, (int32_t) signal);
-    return (uint16_t) ret;
-}
-
-int32_t __imported_wasix_32v1_ws_connect(int32_t arg0, int32_t arg1, int32_t arg2) __attribute__((
-    __import_module__("wasix_32v1"),
-    __import_name__("ws_connect")
-));
-
-__wasi_errno_t __wasi_ws_connect(
-    const char *url,
-    __wasi_fd_t *retptr0
-){
-    size_t url_len = strlen(url);
-    int32_t ret = __imported_wasix_32v1_ws_connect((intptr_t) url, (intptr_t) url_len, (intptr_t) retptr0);
-    return (uint16_t) ret;
-}
-
-int32_t __imported_wasix_32v1_http_request(int32_t arg0, int32_t arg1, int32_t arg2, int32_t arg3, int32_t arg4, int32_t arg5, int32_t arg6, int32_t arg7) __attribute__((
-    __import_module__("wasix_32v1"),
-    __import_name__("http_request")
-));
-
-__wasi_errno_t __wasi_http_request(
-    const char *url,
-    const char *method,
-    const char *headers,
-    __wasi_bool_t gzip,
-    __wasi_http_handles_t *retptr0
-){
-    size_t url_len = strlen(url);
-    size_t method_len = strlen(method);
-    size_t headers_len = strlen(headers);
-    int32_t ret = __imported_wasix_32v1_http_request((intptr_t) url, (intptr_t) url_len, (intptr_t) method, (intptr_t) method_len, (intptr_t) headers, (intptr_t) headers_len, (int32_t) gzip, (intptr_t) retptr0);
-    return (uint16_t) ret;
-}
-
-int32_t __imported_wasix_32v1_http_status(int32_t arg0, int32_t arg1) __attribute__((
-    __import_module__("wasix_32v1"),
-    __import_name__("http_status")
-));
-
-__wasi_errno_t __wasi_http_status(
-    __wasi_fd_t fd,
-    __wasi_http_status_t * status
-){
-    int32_t ret = __imported_wasix_32v1_http_status((int32_t) fd, (int32_t) status);
     return (uint16_t) ret;
 }
 
@@ -914,7 +884,7 @@ int32_t __imported_wasix_32v1_resolve(int32_t arg0, int32_t arg1, int32_t arg2, 
 __wasi_errno_t __wasi_resolve(
     const char *host,
     uint16_t port,
-    __wasi_addr_t * addrs,
+    __wasi_addr_ip_t * addrs,
     __wasi_size_t naddrs,
     __wasi_size_t *retptr0
 ){

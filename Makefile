@@ -193,6 +193,7 @@ LIBC_TOP_HALF_MUSL_SOURCES = \
         unistd/ttyname_r.c \
         linux/wait3.c \
         linux/wait4.c \
+        linux/epoll.c \
         linux/eventfd.c \
         linux/setgroups.c \
         stat/futimesat.c \
@@ -469,7 +470,7 @@ MUSL_OMIT_HEADERS += \
     "lastlog.h" \
     "sys/acct.h" \
     "sys/cachectl.h" \
-    "sys/epoll.h" "sys/reboot.h" "sys/swap.h" \
+    "sys/reboot.h" "sys/swap.h" \
     "sys/inotify.h" \
     "sys/quota.h" \
     "sys/klog.h" \
@@ -507,7 +508,10 @@ ifeq ($(THREAD_MODEL), single)
 MUSL_OMIT_HEADERS += "pthread.h"
 endif
 
-default: finish post-finish
+default: prepare finish post-finish
+
+prepare:
+	rm $(SYSROOT)/lib/$(TARGET_TRIPLE)/libc.a || true
 
 wasix-headers:
 	git submodule init
