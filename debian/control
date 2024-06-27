@@ -11,6 +11,7 @@ Package: wasix-libc
 Architecture: any
 Multi-Arch: foreign
 Depends: ${misc:Depends}, ${shlibs:Depends}
+Conflicts: wasi-libc
 Description: wasix libc implementation for WebAssembly
  This fork of wasi-libc extends libc with the missing functionality needed to
  build complete and useful applications, in particular it incorporates these
