@@ -1,5 +1,4 @@
-# You must remove unused comment lines for the released package.
 version=4
-opts="mode=git, pgpmode=none" \
-https://github.com/wasix-org/wasix-libc.git \
-heads/main
+opts=pgpmode=none,dversionmangle=s/\+ds// \
+https://github.com/wasix-org/wasix-libc/tags \
+(?:.*?/)?v?(\d+-\d+-\d+\.\d)\.tar\.gz debian uupdate
