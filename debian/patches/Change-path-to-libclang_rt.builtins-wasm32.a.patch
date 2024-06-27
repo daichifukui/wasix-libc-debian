@@ -1,0 +1,18 @@
+Subject: Change path to libclang_rt.builtins-wasm32.a
+Author: Fukui Daichi <a.dog.will.talk@akane.waseda.jp>
+Last-Update: 2024-06-27
+Forwarded: not-needed
+
+diff --git a/tools/append-builtins/wasm32-wasi.mri b/tools/append-builtins/wasm32-wasi.mri
+index dd2765f..cbe0203 100644
+--- a/tools/append-builtins/wasm32-wasi.mri
++++ b/tools/append-builtins/wasm32-wasi.mri
+@@ -1,5 +1,5 @@
+ create libc.a
+ addlib libc-old.a
+-addlib ../../../libclang_rt.builtins-wasm32.a
++addlib /usr/lib/llvm-16/lib/clang/16/lib/wasi/libclang_rt.builtins-wasm32.a
+ save
+-end
+\ No newline at end of file
++end

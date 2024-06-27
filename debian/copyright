@@ -2,6 +2,8 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: wasix-libc
 Upstream-Contact: Johnathan Sharratt <johnathan.sharratt@gmail.com>
 Source: https://github.com/wasix-org/wasix-libc
+Files-Excluded:
+ libclang_rt.builtins-wasm32.a
 
 Files: *
 Copyright:

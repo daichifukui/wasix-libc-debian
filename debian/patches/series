@@ -1,1 +1,2 @@
 0001-Fix-build-errors.patch
+Change-path-to-libclang_rt.builtins-wasm32.a.patch

@@ -2,7 +2,7 @@ Source: wasix-libc
 Section: devel
 Priority: optional
 Maintainer: Fukui Daichi <a.dog.will.talk@akane.waseda.jp>
-Build-Depends: debhelper-compat (= 13), clang, llvm
+Build-Depends: debhelper-compat (= 13), clang-16, llvm-16, libclang-rt-16-dev-wasm32
 Standards-Version: 4.6.2
 Homepage: https://github.com/wasix-org/wasix-libc
 Rules-Requires-Root: no
