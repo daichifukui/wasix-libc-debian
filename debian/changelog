@@ -1,5 +1,5 @@
-wasix-libc (0.0~git20230922.d0362cb-1) unstable; urgency=low
+wasix-libc (2024-06-26.1+ds-1) unstable; urgency=medium
 
   * Initial release. (Closes: #1056052)
 
- -- Fukui Daichi <a.dog.will.talk@akane.waseda.jp>  Sat, 07 Oct 2023 04:08:09 +0000
+ -- Fukui Daichi <a.dog.will.talk@akane.waseda.jp>  Thu, 27 Jun 2024 06:48:25 +0000
