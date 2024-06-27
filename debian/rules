@@ -1,9 +1,4 @@
 #!/usr/bin/make -f
-# You must remove unused comment lines for the released package.
-#export DH_VERBOSE = 1
-#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
-#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
-#export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 
 export NM = llvm-nm-16
 export AR = llvm-ar-16
@@ -12,10 +7,6 @@ export TARGET_OS = wasix
 export TARGET_ARCH = wasm32
 
 %:
-	dh $@
-
-.PHONY: build
-build:
 	dh $@
 
 override_dh_auto_build:
