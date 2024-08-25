@@ -9,6 +9,17 @@ export TARGET_ARCH = wasm32
 %:
 	dh $@
 
+VERSION := 2024-07-08.1
+get-orig-source:
+	wget --no-clobber -O wasix-libc-$(VERSION).tar.gz https://github.com/wasix-org/wasix-libc/archive/refs/tags/v$(VERSION).tar.gz
+	mkdir wasix-libc-$(VERSION)+ds
+	tar --strip-components=1 -C wasix-libc-$(VERSION)+ds -xzf wasix-libc-$(VERSION).tar.gz
+	set -e; cd wasix-libc-$(VERSION)+ds; \
+		rm -f libclang_rt.builtins-wasm32.a;
+	tar -cJf wasix-libc_$(VERSION)+ds.orig.tar.xz wasix-libc-$(VERSION)+ds
+	mv wasix-libc_$(VERSION)+ds.orig.tar.xz wasix-libc-$(VERSION).tar.gz ..
+	rm -rf wasix-libc-$(VERSION)+ds
+
 override_dh_auto_build:
 	dh_auto_build -- finish
 
