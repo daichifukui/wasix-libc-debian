@@ -1,4 +1,6 @@
 version=4
-opts=pgpmode=none,dversionmangle=s/\+ds// \
-https://github.com/wasix-org/wasix-libc/tags \
-(?:.*?/)?v?(\d+-\d+-\d+\.\d)\.tar\.gz debian uupdate
+opts=pgpmode=none,dversionmangle=s/\+ds//,\
+repacksuffix=+ds,\
+uversionmangle=s{[\-]}{.}g \
+ https://github.com/wasix-org/wasix-libc/tags \
+ (?:.*?/)?v?(\d+-\d+-\d+\.\d)\.tar\.gz debian uupdate
