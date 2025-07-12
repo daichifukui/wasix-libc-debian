@@ -21,6 +21,8 @@ MALLOC_IMPL ?= dlmalloc
 BUILD_LIBC_TOP_HALF ?= yes
 # The directory where we will store intermediate artifacts.
 OBJDIR ?= build/$(TARGET_TRIPLE)
+# Whether to compile with PIC (needed for shared libs and dynamic linking)
+PIC ?= no
 
 # When the length is no larger than this threshold, we consider the
 # overhead of bulk memory opcodes to outweigh the performance benefit,
@@ -92,6 +94,7 @@ LIBC_TOP_HALF_MUSL_SOURCES = \
         misc/getopt.c \
         misc/getopt_long.c \
         misc/getsubopt.c \
+        misc/initgroups.c \
         misc/getrlimit.c \
         misc/setrlimit.c \
         misc/getrusage.c \
@@ -196,6 +199,11 @@ LIBC_TOP_HALF_MUSL_SOURCES = \
         linux/epoll.c \
         linux/eventfd.c \
         linux/setgroups.c \
+        ldso/dlclose.c \
+        ldso/dlerror.c \
+        ldso/dlinfo.c \
+        ldso/dlopen.c \
+        ldso/dlsym.c \
         stat/futimesat.c \
         legacy/getpagesize.c \
         thread/thrd_sleep.c \
@@ -356,6 +364,7 @@ ASMFLAGS += --target=$(TARGET_TRIPLE)
 CFLAGS += -fno-trapping-math
 # Add all warnings, but disable a few which occur in third-party code.
 CFLAGS += -Wall -Wextra -Werror \
+  -Wno-incompatible-function-pointer-types \
   -Wno-null-pointer-arithmetic \
   -Wno-unused-parameter \
   -Wno-sign-compare \
@@ -378,6 +387,11 @@ CFLAGS += -mthread-model posix -pthread -ftls-model=local-exec
 
 # Include cloudlib's directory to access the structure definition of clockid_t
 CFLAGS += -I$(LIBC_BOTTOM_HALF_CLOUDLIBC_SRC)
+endif
+
+# Configure PIC.
+ifeq ($(PIC), yes)
+CFLAGS += -fPIC
 endif
 
 # Expose the public headers to the implementation. We use `-isystem` for
@@ -463,7 +477,6 @@ MUSL_OMIT_HEADERS += \
     "bits/shm.h" "bits/msg.h" "bits/ipc.h" "bits/ptrace.h" \
     "bits/statfs.h" \
     "sys/vfs.h" \
-    "sys/statvfs.h" \
     "sys/syslog.h" \
     "ucontext.h" "sys/ucontext.h" \
     "utmp.h" "utmpx.h" \
@@ -487,7 +500,6 @@ MUSL_OMIT_HEADERS += \
     "mntent.h" \
     "resolv.h" \
     "pty.h" \
-    "dlfcn.h" \
     "ulimit.h" \
     "sys/xattr.h" \
     "wordexp.h" \
@@ -511,7 +523,7 @@ endif
 default: prepare finish post-finish
 
 prepare:
-	rm $(SYSROOT)/lib/$(TARGET_TRIPLE)/libc.a || true
+	rm $(SYSROOT_LIB)/libc.a || true
 
 wasix-headers:
 	git submodule init
@@ -520,14 +532,14 @@ wasix-headers:
 
 post-finish: finish
 ifeq ($(TARGET_TRIPLE), wasm32-wasi)
-	cd $(SYSROOT)/lib/$(TARGET_TRIPLE) && \
+	cd $(SYSROOT_LIB) && \
 	mv libc.a libc-old.a && \
-	$(AR) -M < ../../../tools/append-builtins/$(TARGET_TRIPLE).mri && \
+	$(AR) -M < $(CURDIR)/tools/append-builtins/$(TARGET_TRIPLE).mri && \
 	rm libc-old.a
 endif
 
 	rm -f sysroot/lib/wasm32-wasi/libc-printscan-log-double.a
-	rsync -rtvu --delete ./sysroot/ ./sysroot32/
+# sh -c 'rm -rf ./sysroot32/ && mkdir -p ./sysroot32/ && cp -r --preserve=timestamps ./sysroot/. ./sysroot32/' || true
 
 $(SYSROOT_LIB)/libc.a: $(LIBC_OBJS)
 
@@ -540,6 +552,12 @@ $(SYSROOT_LIB)/libwasi-emulated-mman.a: $(LIBWASI_EMULATED_MMAN_OBJS)
 $(SYSROOT_LIB)/libwasi-emulated-process-clocks.a: $(LIBWASI_EMULATED_PROCESS_CLOCKS_OBJS)
 
 $(SYSROOT_LIB)/libwasi-emulated-getpid.a: $(LIBWASI_EMULATED_GETPID_OBJS)
+
+ifeq ($(PIC), yes)
+$(SYSROOT_LIB)/libcommon-tag-stubs.a: libcommon-tag-stubs.a
+	mkdir -p "$(SYSROOT_LIB)"
+	cp libcommon-tag-stubs.a $@
+endif
 
 %.a:
 	@mkdir -p "$(@D)"
@@ -647,7 +665,8 @@ libc: include_dirs \
     $(SYSROOT_LIB)/libc-printscan-no-floating-point.a \
     $(SYSROOT_LIB)/libwasi-emulated-mman.a \
     $(SYSROOT_LIB)/libwasi-emulated-process-clocks.a \
-    $(SYSROOT_LIB)/libwasi-emulated-getpid.a
+    $(SYSROOT_LIB)/libwasi-emulated-getpid.a \
+    $(SYSROOT_LIB)/libcommon-tag-stubs.a
 
 finish: startup_files libc
 	#
@@ -763,9 +782,10 @@ install: finish
 	cp -r "$(SYSROOT)/lib" "$(SYSROOT)/share" "$(SYSROOT)/include" "$(INSTALL_DIR)"
 
 clean:
-	$(RM) -r "$(OBJDIR)"
+	$(RM) -r build
 	$(RM) -r "$(SYSROOT)"
-	$(RM) -r "$(SYSROOT)32"
-	$(RM) -r "$(SYSROOT)64"
+
+clean-all: clean
+	$(RM) -r "$(SYSROOT)"*
 
 .PHONY: default startup_files libc finish install include_dirs clean

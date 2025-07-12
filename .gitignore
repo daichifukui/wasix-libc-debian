@@ -1,7 +1,5 @@
 .ccls*
-sysroot
-sysroot32
-sysroot64
+/sysroot*
 build
 .vscode
 dist

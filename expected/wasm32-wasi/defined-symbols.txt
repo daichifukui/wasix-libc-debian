@@ -52,6 +52,10 @@ __daylight
 __default_guardsize
 __default_stacksize
 __des_setkey
+__dl_invalid_handle
+__dl_seterr
+__dl_thread_cleanup
+__dl_vseterr
 __dlerror_lockptr
 __do_cleanup_pop
 __do_cleanup_push
@@ -225,6 +229,7 @@ __pio2_lo
 __pleval
 __polevll
 __posix_getopt
+__posix_spawn
 __pow_log_data
 __powf_log2_data
 __private_cond_signal
@@ -371,6 +376,9 @@ __wasi_chdir
 __wasi_clock_res_get
 __wasi_clock_time_get
 __wasi_clock_time_set
+__wasi_dl_invalid_handle
+__wasi_dlopen
+__wasi_dlsym
 __wasi_environ_get
 __wasi_environ_sizes_get
 __wasi_epoll_create
@@ -381,7 +389,10 @@ __wasi_fd_allocate
 __wasi_fd_close
 __wasi_fd_datasync
 __wasi_fd_dup
+__wasi_fd_dup2
 __wasi_fd_event
+__wasi_fd_fdflags_get
+__wasi_fd_fdflags_set
 __wasi_fd_fdstat_get
 __wasi_fd_fdstat_set_flags
 __wasi_fd_fdstat_set_rights
@@ -404,12 +415,14 @@ __wasi_futex_wait
 __wasi_futex_wake
 __wasi_futex_wake_all
 __wasi_getcwd
+__wasi_init_signals
 __wasi_init_tp
 __wasi_path_create_directory
 __wasi_path_filestat_get
 __wasi_path_filestat_set_times
 __wasi_path_link
 __wasi_path_open
+__wasi_path_open2
 __wasi_path_readlink
 __wasi_path_remove_directory
 __wasi_path_rename
@@ -431,6 +444,7 @@ __wasi_port_route_remove
 __wasi_port_unbridge
 __wasi_proc_exec
 __wasi_proc_exec2
+__wasi_proc_exec3
 __wasi_proc_exit
 __wasi_proc_fork
 __wasi_proc_id
@@ -439,7 +453,11 @@ __wasi_proc_parent
 __wasi_proc_raise
 __wasi_proc_raise_interval
 __wasi_proc_signal
+__wasi_proc_signals_get
+__wasi_proc_signals_sizes_get
+__wasi_proc_snapshot
 __wasi_proc_spawn
+__wasi_proc_spawn2
 __wasi_random_get
 __wasi_resolve
 __wasi_sched_yield
@@ -458,6 +476,7 @@ __wasi_sock_leave_multicast_v4
 __wasi_sock_leave_multicast_v6
 __wasi_sock_listen
 __wasi_sock_open
+__wasi_sock_pair
 __wasi_sock_recv
 __wasi_sock_recv_from
 __wasi_sock_send
@@ -490,6 +509,7 @@ __wasilibc_dttoif
 __wasilibc_ensure_environ
 __wasilibc_environ
 __wasilibc_environ_init
+__wasilibc_exec_combine_strings
 __wasilibc_fd_renumber
 __wasilibc_find_abspath
 __wasilibc_find_relpath
@@ -538,7 +558,9 @@ __wasilibc_tls_align
 __wasilibc_tls_size
 __wasilibc_unlinkat
 __wasilibc_utimens
+__wasix_init_tls
 __wasm_call_dtors
+__wasm_sigaction
 __wasm_signal
 __wcscoll_l
 __wcsftime_l
@@ -739,6 +761,11 @@ difftime
 dirfd
 dirname
 div
+dlclose
+dlerror
+dlinfo
+dlopen
+dlsym
 dngettext
 dprintf
 drand48
@@ -900,6 +927,7 @@ fsetpos
 fsetpos64
 fstat
 fstatat
+fstatvfs
 fsync
 ftell
 ftello
@@ -1030,6 +1058,7 @@ inet_ntoa
 inet_ntop
 inet_pton
 init_services
+initgroups
 initstate
 insque
 ioctl
@@ -1548,6 +1577,7 @@ srand48
 srandom
 sscanf
 stat
+statvfs
 stderr
 stdin
 stdout
@@ -1716,6 +1746,7 @@ wait3
 wait4
 waitpid
 wasi_thread_start
+wasix_proc_snapshot
 wcpcpy
 wcpncpy
 wcrtomb

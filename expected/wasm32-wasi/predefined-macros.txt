@@ -495,6 +495,7 @@
 #define DT_RELSZ 18
 #define DT_RPATH 15
 #define DT_RUNPATH 29
+#define DT_SOCK (UINT8_C(255))
 #define DT_SONAME 14
 #define DT_SPARC_NUM 2
 #define DT_SPARC_REGISTER 0x70000001
@@ -2316,7 +2317,7 @@
 #define OPOST 0000001
 #define O_ACCMODE (O_EXEC | O_RDWR | O_SEARCH)
 #define O_APPEND __WASI_FDFLAGS_APPEND
-#define O_CLOEXEC (0)
+#define O_CLOEXEC (__WASI_FDFLAGSEXT_CLOEXEC << 30)
 #define O_CREAT (__WASI_OFLAGS_CREAT << 12)
 #define O_DIRECTORY (__WASI_OFLAGS_DIRECTORY << 12)
 #define O_DSYNC __WASI_FDFLAGS_DSYNC
@@ -2660,6 +2661,13 @@
 #define RRFIXEDSZ NS_RRFIXEDSZ
 #define RRQ 01
 #define RS_HIPRI 0x01
+#define RTLD_DEFAULT ((void *)0)
+#define RTLD_GLOBAL __WASI_DL_FLAGS_GLOBAL
+#define RTLD_LAZY __WASI_DL_FLAGS_LAZY
+#define RTLD_LOCAL 0
+#define RTLD_NODELETE __WASI_DL_FLAGS_NODELETE
+#define RTLD_NOLOAD __WASI_DL_FLAGS_NOLOAD
+#define RTLD_NOW __WASI_DL_FLAGS_NOW
 #define RUSAGE_CHILDREN 2
 #define RUSAGE_SELF 1
 #define R_386_16 20
@@ -4508,6 +4516,18 @@
 #define STV_HIDDEN 2
 #define STV_INTERNAL 1
 #define STV_PROTECTED 3
+#define ST_APPEND 256
+#define ST_IMMUTABLE 512
+#define ST_MANDLOCK 64
+#define ST_NOATIME 1024
+#define ST_NODEV 4
+#define ST_NODIRATIME 2048
+#define ST_NOEXEC 8
+#define ST_NOSUID 2
+#define ST_RDONLY 1
+#define ST_RELATIME 4096
+#define ST_SYNCHRONOUS 16
+#define ST_WRITE 128
 #define SUN_LEN(s) (2+strlen((s)->sun_path))
 #define SUSP 237
 #define SYMINFO_BT_LOWRESERVE 0xff00
@@ -4536,7 +4556,7 @@
 #define S_IFLNK (0xa000)
 #define S_IFMT (S_IFBLK | S_IFCHR | S_IFDIR | S_IFIFO | S_IFLNK | S_IFREG | S_IFSOCK)
 #define S_IFREG (0x8000)
-#define S_IFSOCK (0xc000)
+#define S_IFSOCK (0xe000)
 #define S_INPUT 0x0001
 #define S_IREAD S_IRUSR
 #define S_IRGRP (0x20)
@@ -4733,6 +4753,7 @@
 #define TIME_UTC 1
 #define TIME_WAIT 4
 #define TIOCGWINSZ 0x101
+#define TIOCSWINSZ 0x102
 #define TMAGIC "ustar"
 #define TMAGLEN 6
 #define TOEXEC 00001
@@ -4966,6 +4987,7 @@
 #define _Complex_I (0.0f+1.0fi)
 #define _DIRENT_H 
 #define _DIRENT_HAVE_D_TYPE 
+#define _DLFCN_H 
 #define _ELF_H 
 #define _ENDIAN_H 
 #define _ERRNO_H 
@@ -5308,7 +5330,7 @@
 #define _STROPTS_H 
 #define _SYSEXITS_H 
 #define _SYSLOG_H 
-#define _SYS_EPOLL_H
+#define _SYS_EPOLL_H 
 #define _SYS_EVENTFD_H 
 #define _SYS_FILE_H 
 #define _SYS_IOCTL_H 
@@ -5319,6 +5341,7 @@
 #define _SYS_SELECT_H 
 #define _SYS_SENDFILE_H 
 #define _SYS_SOCKET_H 
+#define _SYS_STATVFS_H
 #define _SYS_STAT_H 
 #define _SYS_SYSCALL_H 
 #define _SYS_SYSINFO_H 
@@ -5398,6 +5421,7 @@
 #define __DBL_MIN_10_EXP__ (-307)
 #define __DBL_MIN_EXP__ (-1021)
 #define __DBL_MIN__ 2.2250738585072014e-308
+#define __DBL_NORM_MAX__ 1.7976931348623157e+308
 #define __DECIMAL_DIG__ __LDBL_DECIMAL_DIG__
 #define __DEFINED_FILE 
 #define __DEFINED___isoc_va_list 
@@ -5483,7 +5507,18 @@
 #define __FLT_MIN_10_EXP__ (-37)
 #define __FLT_MIN_EXP__ (-125)
 #define __FLT_MIN__ 1.17549435e-38F
+#define __FLT_NORM_MAX__ 3.40282347e+38F
 #define __FLT_RADIX__ 2
+#define __FPCLASS_NEGINF 0x0004
+#define __FPCLASS_NEGNORMAL 0x0008
+#define __FPCLASS_NEGSUBNORMAL 0x0010
+#define __FPCLASS_NEGZERO 0x0020
+#define __FPCLASS_POSINF 0x0200
+#define __FPCLASS_POSNORMAL 0x0100
+#define __FPCLASS_POSSUBNORMAL 0x0080
+#define __FPCLASS_POSZERO 0x0040
+#define __FPCLASS_QNAN 0x0002
+#define __FPCLASS_SNAN 0x0001
 #define __compiler_ATOMIC_BOOL_LOCK_FREE 2
 #define __compiler_ATOMIC_CHAR16_T_LOCK_FREE 2
 #define __compiler_ATOMIC_CHAR32_T_LOCK_FREE 2
@@ -5495,31 +5530,38 @@
 #define __compiler_ATOMIC_SHORT_LOCK_FREE 2
 #define __GCC_ATOMIC_TEST_AND_SET_TRUEVAL 1
 #define __compiler_ATOMIC_WCHAR_T_LOCK_FREE 2
+#define __GCC_CONSTRUCTIVE_SIZE 64
+#define __GCC_DESTRUCTIVE_SIZE 64
 #define __GNUC_STDC_INLINE__ 1
 #define __GNUC_VA_LIST 1
 #define __GNU_GETTEXT_SUPPORTED_REVISION(major) ((major) == 0 ? 1 : -1)
 #define __GXX_ABI_VERSION 1002
 #define __ILP32__ 1
+#define __INT16_C(c) c
 #define __INT16_C_SUFFIX__ 
 #define __INT16_FMTd__ "hd"
 #define __INT16_FMTi__ "hi"
 #define __INT16_MAX__ 32767
 #define __INT16_TYPE__ short
+#define __INT32_C(c) c
 #define __INT32_C_SUFFIX__ 
 #define __INT32_FMTd__ "d"
 #define __INT32_FMTi__ "i"
 #define __INT32_MAX__ 2147483647
 #define __INT32_TYPE__ int
+#define __INT64_C(c) c##LL
 #define __INT64_C_SUFFIX__ LL
 #define __INT64_FMTd__ "lld"
 #define __INT64_FMTi__ "lli"
 #define __INT64_MAX__ 9223372036854775807LL
 #define __INT64_TYPE__ long long int
+#define __INT8_C(c) c
 #define __INT8_C_SUFFIX__ 
 #define __INT8_FMTd__ "hhd"
 #define __INT8_FMTi__ "hhi"
 #define __INT8_MAX__ 127
 #define __INT8_TYPE__ signed char
+#define __INTMAX_C(c) c##LL
 #define __INTMAX_C_SUFFIX__ LL
 #define __INTMAX_FMTd__ "lld"
 #define __INTMAX_FMTi__ "lli"
@@ -5583,11 +5625,17 @@
 #define __LDBL_MIN_10_EXP__ (-4931)
 #define __LDBL_MIN_EXP__ (-16381)
 #define __LDBL_MIN__ 3.36210314311209350626267781732175260e-4932L
+#define __LDBL_NORM_MAX__ 1.18973149535723176508575932662800702e+4932L
 #define __LITTLE_ENDIAN 1234
 #define __LITTLE_ENDIAN__ 1
 #define __LONG_LONG_MAX__ 9223372036854775807LL
 #define __LONG_MAX __LONG_MAX__
 #define __LONG_MAX__ 2147483647L
+#define __MEMORY_SCOPE_DEVICE 1
+#define __MEMORY_SCOPE_SINGLE 4
+#define __MEMORY_SCOPE_SYSTEM 0
+#define __MEMORY_SCOPE_WRKGRP 2
+#define __MEMORY_SCOPE_WVFRNT 3
 #define __NAMESER 19991006
 #define __NEED_FILE 
 #define __NEED___isoc_va_list 
@@ -5708,6 +5756,9 @@
 #define __SIZE_TYPE__ long unsigned int
 #define __SIZE_WIDTH__ 32
 #define __STDARG_H 
+#define __STDC_EMBED_EMPTY__ 2
+#define __STDC_EMBED_FOUND__ 1
+#define __STDC_EMBED_NOT_FOUND__ 0
 #define __STDC_HOSTED__ 1
 #define __STDC_IEC_559__ 1
 #define __STDC_ISO_10646__ 201206L
@@ -5737,6 +5788,7 @@
 #define __UAPI_DEF_IP_MREQ 0
 #define __UAPI_DEF_SOCKADDR_IN 0
 #define __UAPI_DEF_SOCKADDR_IN6 0
+#define __UINT16_C(c) c
 #define __UINT16_C_SUFFIX__ 
 #define __UINT16_FMTX__ "hX"
 #define __UINT16_FMTo__ "ho"
@@ -5744,6 +5796,7 @@
 #define __UINT16_FMTx__ "hx"
 #define __UINT16_MAX__ 65535
 #define __UINT16_TYPE__ unsigned short
+#define __UINT32_C(c) c##U
 #define __UINT32_C_SUFFIX__ U
 #define __UINT32_FMTX__ "X"
 #define __UINT32_FMTo__ "o"
@@ -5751,6 +5804,7 @@
 #define __UINT32_FMTx__ "x"
 #define __UINT32_MAX__ 4294967295U
 #define __UINT32_TYPE__ unsigned int
+#define __UINT64_C(c) c##ULL
 #define __UINT64_C_SUFFIX__ ULL
 #define __UINT64_FMTX__ "llX"
 #define __UINT64_FMTo__ "llo"
@@ -5758,6 +5812,7 @@
 #define __UINT64_FMTx__ "llx"
 #define __UINT64_MAX__ 18446744073709551615ULL
 #define __UINT64_TYPE__ long long unsigned int
+#define __UINT8_C(c) c
 #define __UINT8_C_SUFFIX__ 
 #define __UINT8_FMTX__ "hhX"
 #define __UINT8_FMTo__ "hho"
@@ -5765,6 +5820,7 @@
 #define __UINT8_FMTx__ "hhx"
 #define __UINT8_MAX__ 255
 #define __UINT8_TYPE__ unsigned char
+#define __UINTMAX_C(c) c##ULL
 #define __UINTMAX_C_SUFFIX__ ULL
 #define __UINTMAX_FMTX__ "llX"
 #define __UINTMAX_FMTo__ "llo"
@@ -5852,6 +5908,14 @@
 #define __WASI_CLOCKID_REALTIME (UINT32_C(0))
 #define __WASI_CLOCKID_THREAD_CPUTIME_ID (UINT32_C(3))
 #define __WASI_DIRCOOKIE_START (UINT64_C(0))
+#define __WASI_DISPOSITION_DEFAULT (UINT8_C(0))
+#define __WASI_DISPOSITION_IGNORE (UINT8_C(1))
+#define __WASI_DL_FLAGS_DEEPBIND ((__wasi_dl_flags_t)(1 << 5))
+#define __WASI_DL_FLAGS_GLOBAL ((__wasi_dl_flags_t)(1 << 2))
+#define __WASI_DL_FLAGS_LAZY ((__wasi_dl_flags_t)(1 << 0))
+#define __WASI_DL_FLAGS_NODELETE ((__wasi_dl_flags_t)(1 << 4))
+#define __WASI_DL_FLAGS_NOLOAD ((__wasi_dl_flags_t)(1 << 3))
+#define __WASI_DL_FLAGS_NOW ((__wasi_dl_flags_t)(1 << 1))
 #define __WASI_EPOLL_CTL_ADD (UINT32_C(0))
 #define __WASI_EPOLL_CTL_DEL (UINT32_C(2))
 #define __WASI_EPOLL_CTL_MOD (UINT32_C(1))
@@ -5949,6 +6013,7 @@
 #define __WASI_EVENTTYPE_CLOCK (UINT8_C(0))
 #define __WASI_EVENTTYPE_FD_READ (UINT8_C(1))
 #define __WASI_EVENTTYPE_FD_WRITE (UINT8_C(2))
+#define __WASI_FDFLAGSEXT_CLOEXEC ((__wasi_fdflagsext_t)(1 << 0))
 #define __WASI_FDFLAGS_APPEND ((__wasi_fdflags_t)(1 << 0))
 #define __WASI_FDFLAGS_DSYNC ((__wasi_fdflags_t)(1 << 1))
 #define __WASI_FDFLAGS_NONBLOCK ((__wasi_fdflags_t)(1 << 2))
@@ -5982,7 +6047,13 @@
 #define __WASI_OPTION_NONE (UINT8_C(0))
 #define __WASI_OPTION_SOME (UINT8_C(1))
 #define __WASI_PREOPENTYPE_DIR (UINT8_C(0))
+#define __WASI_PROC_SPAWN_FD_OP_NAME_CHDIR (UINT8_C(3))
+#define __WASI_PROC_SPAWN_FD_OP_NAME_CLOSE (UINT8_C(0))
+#define __WASI_PROC_SPAWN_FD_OP_NAME_DUP2 (UINT8_C(1))
+#define __WASI_PROC_SPAWN_FD_OP_NAME_FCHDIR (UINT8_C(4))
+#define __WASI_PROC_SPAWN_FD_OP_NAME_OPEN (UINT8_C(2))
 #define __WASI_RIFLAGS_RECV_DATA_TRUNCATED ((__wasi_riflags_t)(1 << 2))
+#define __WASI_RIFLAGS_RECV_DONT_WAIT ((__wasi_riflags_t)(1 << 3))
 #define __WASI_RIFLAGS_RECV_PEEK ((__wasi_riflags_t)(1 << 0))
 #define __WASI_RIFLAGS_RECV_WAITALL ((__wasi_riflags_t)(1 << 1))
 #define __WASI_RIGHTS_FD_ADVISE ((__wasi_rights_t)(1 << 7))
@@ -6027,6 +6098,7 @@
 #define __WASI_ROFLAGS_RECV_DATA_TRUNCATED ((__wasi_roflags_t)(1 << 0))
 #define __WASI_SDFLAGS_RD ((__wasi_sdflags_t)(1 << 0))
 #define __WASI_SDFLAGS_WR ((__wasi_sdflags_t)(1 << 1))
+#define __WASI_SIFLAGS_SEND_DONT_WAIT ((__wasi_siflags_t)(1 << 0))
 #define __WASI_SIGNAL_ABRT (UINT8_C(6))
 #define __WASI_SIGNAL_ALRM (UINT8_C(14))
 #define __WASI_SIGNAL_BUS (UINT8_C(7))
@@ -6390,6 +6462,7 @@
 #define __bitop(x,i,o) ((x)[(i)/8] o (1<<(i)%8))
 #define __bool_true_false_are_defined 1
 #define __inline inline
+#define __need_STDDEF_H_misc 
 #define __restrict restrict
 #define __tg_complex(fun,x) (__RETCAST_CX(x)( __FLTCX((x)+I) && __IS_FP(x) ? fun ## f (x) : __LDBLCX((x)+I) ? fun ## l (x) : fun(x) ))
 #define __tg_complex_retreal(fun,x) (__RETCAST_REAL(x)( __FLTCX((x)+I) && __IS_FP(x) ? fun ## f (x) : __LDBLCX((x)+I) ? fun ## l (x) : fun(x) ))
@@ -6404,14 +6477,14 @@
 #define __tg_real_remquo(x,y,z) (__RETCAST_2(x, y)( __FLT(x) && __FLT(y) ? remquof(x, y, z) : __LDBL((x)+(y)) ? remquol(x, y, z) : remquo(x, y, z) ))
 #define __tm_gmtoff tm_gmtoff
 #define __tm_zone tm_zone
-#define __va_copy(d,s) __builtin_va_copy(d,s)
+#define __va_copy(d,s) __builtin_va_copy(d, s)
 #define __wasi__ 1
 #define __wasi_api_h 
 #define __wasi_libc_environ_h 
 #define __wasi_libc_find_relpath_h 
 #define __wasi_libc_h 
 #define __wasi_libc_nocwd_h 
-#define __wasi_polyfill_h
+#define __wasi_polyfill_h 
 #define __wasilibc___errno_h 
 #define __wasilibc___errno_values_h 
 #define __wasilibc___fd_set_h 
@@ -6488,13 +6561,17 @@
 #define __wasilibc___typedef_time_t_h 
 #define __wasilibc___typedef_uid_t_h 
 #define __wasix__ 1
-#define __wasix_api_h
+#define __wasix_api_h 
 #define __wasm 1
 #define __wasm32 1
 #define __wasm32__ 1
 #define __wasm__ 1
 #define __wasm_atomics__ 1
 #define __wasm_bulk_memory__ 1
+#define __wasm_bulk_memory_opt__ 1
+#define __wasm_multivalue__ 1
+#define __wasm_nontrapping_fptoint__ 1
+#define __wasm_reference_types__ 1
 #define _tolower(a) ((a)|0x20)
 #define _toupper(a) ((a)&0x5f)
 #define acos(x) __tg_real_complex(acos, (x))
@@ -6571,6 +6648,7 @@
 #define fsfilcnt64_t fsfilcnt_t
 #define fstat64 fstat
 #define fstatat64 fstatat
+#define fstatvfs64 fstatvfs
 #define ftello64 ftello
 #define ftruncate64 ftruncate
 #define getdents64 getdents
@@ -6779,6 +6857,7 @@
 #define st_mtime st_mtim.tv_sec
 #define stat64 stat
 #define static_assert _Static_assert
+#define statvfs64 statvfs
 #define stderr (stderr)
 #define stdin (stdin)
 #define stdout (stdout)
