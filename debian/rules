@@ -1,8 +1,8 @@
 #!/usr/bin/make -f
 
-export NM = llvm-nm-16
-export AR = llvm-ar-16
-export CC = clang-16
+export NM = llvm-nm
+export AR = llvm-ar
+export CC = clang
 export TARGET_OS = wasix
 export TARGET_ARCH = wasm32
 
