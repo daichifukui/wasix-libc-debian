@@ -1,3 +1,3 @@
 0001-Fix-build-errors.patch
-Change-path-to-libclang_rt.builtins-wasm32.a.patch
 0002-fix-imcompatible-cast.patch
+0003-remove-undefined-symbols.patch
