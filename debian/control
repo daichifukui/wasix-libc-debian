@@ -6,6 +6,8 @@ Build-Depends: debhelper-compat (= 13), clang, llvm, libclang-rt-dev-wasm32
 Standards-Version: 4.7.0
 Homepage: https://github.com/wasix-org/wasix-libc
 Rules-Requires-Root: no
+Vcs-Browser: https://salsa.debian.org/dfukui/wasix-libc
+Vcs-Git: https://salsa.debian.org/dfukui/wasix-libc.git
 
 Package: wasix-libc
 Architecture: any
