@@ -89,12 +89,16 @@ ssize_t write(int, const void *, size_t);
 ssize_t pread(int, void *, size_t, off_t);
 ssize_t pwrite(int, const void *, size_t, off_t);
 
-#ifdef __wasilibc_unmodified_upstream /* WASI has no chown */
+// TODO: Actually implement ownership in WASIX
+
+// Only mocked in WASIX. Trying to change ownership to anyone but 0:0 will return ENOSYS.
 int chown(const char *, uid_t, gid_t);
+// Only mocked in WASIX. Trying to change ownership to anyone but 0:0 will return ENOSYS.
 int fchown(int, uid_t, gid_t);
+// Only mocked in WASIX. Trying to change ownership to anyone but 0:0 will return ENOSYS.
 int lchown(const char *, uid_t, gid_t);
+// Only mocked in WASIX. Trying to change ownership to anyone but 0:0 will return ENOSYS.
 int fchownat(int, const char *, uid_t, gid_t, int);
-#endif
 
 int link(const char *, const char *);
 int linkat(int, const char *, int, const char *, int);
@@ -130,9 +134,11 @@ unsigned sleep(unsigned);
 int pause(void);
 #endif
 
+#if defined(__wasilibc_unmodified_upstream) || !defined(__wasm_exception_handling__)
 pid_t fork(void);
 pid_t _fork_internal(int copy_mem);
 pid_t _Fork(int copy_mem);
+#endif
 int execve(const char *, char *const [], char *const []);
 int execv(const char *, char *const []);
 int execle(const char *, const char *, ...);
@@ -221,7 +227,19 @@ unsigned ualarm(unsigned, unsigned);
 int brk(void *);
 #endif
 void *sbrk(intptr_t);
+#if defined(__wasilibc_unmodified_upstream) || !defined(__wasm_exception_handling__)
 pid_t vfork(void);
+#elif defined(__wasm_exception_handling__)
+/* setjmp/longjmp based vfork implementation */
+#include <setjmp.h>
+/* Helper function and buffer for vfork */
+extern _Thread_local jmp_buf __vfork_jump[2];
+extern _Thread_local int __vfork_jump_free_index;
+extern pid_t __vfork_internal(int setjmp_result);
+/* This must be a macro, as setjmp needs to happen in the calling function */
+/* Technically that's not 100% POSIX compliant, as you cannot take a pointer to vfork that way, but there's no other way. */
+#define vfork() __vfork_internal(setjmp(__vfork_jump[__vfork_jump_free_index]))
+#endif
 #ifdef __wasilibc_unmodified_upstream /* WASI has no processes */
 int vhangup(void);
 int chroot(const char *);
@@ -233,7 +251,9 @@ int sethostname(const char *, size_t);
 int getdomainname(char *, size_t);
 int setdomainname(const char *, size_t);
 int setgroups(size_t, const gid_t *);
+#endif
 char *getpass(const char *);
+#ifdef __wasilibc_unmodified_upstream
 int daemon(int, int);
 void setusershell(void);
 void endusershell(void);

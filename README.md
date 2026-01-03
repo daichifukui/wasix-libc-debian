@@ -13,7 +13,9 @@ additional extensions:
     - Multicast, Anycast
     - RAW sockets
 - current directory support (`chdir`) integrated with the runtime
-- `setjmp` / `longjmp` support (used extensively in `libc` ) via `asyncify`
+- `libffi` support
+- `dlopen` / `dlsym` / `dlopen` support
+- `setjmp` / `longjmp` support (used extensively in `libc` ) via WASM excpetion handling or `asyncify`
 - process forking (`fork` and `vfork` )
 - subprocess spawning and waiting (`exec` , `wait` )
 - TTY support
@@ -115,3 +117,7 @@ compiler-rt, libcxx, or libcxxabi, for `libclang_rt.builtins-wasm32.a`, libc++.a
 or libc++abi.a, respectively, so they may not be usable without
 extra setup. This is one of the things [wasi-sdk] simplifies, as it includes
 cross-compiled builds of compiler-rt, libc++.a, and libc++abi.a.
+
+## Updating the expected defines
+
+To update the expected defines for all build configurations after you did some changes, you can run `bash tools/update-expects.sh` from the root of the repository. Make sure to only use this command, when you don't have any unstaged changes.

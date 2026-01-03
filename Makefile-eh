@@ -23,6 +23,11 @@ BUILD_LIBC_TOP_HALF ?= yes
 OBJDIR ?= build/$(TARGET_TRIPLE)
 # Whether to compile with PIC (needed for shared libs and dynamic linking)
 PIC ?= no
+# Whether to verify the build symbols against the expected symbol list.
+# Disabling this is useful for development, where differences in the
+# exact version of clang can cause some symbols (especially macros) to
+# be added or removed.
+CHECK_SYMBOLS ?= yes
 
 ifeq ($(PIC), no)
 EXPECTED_SYMBOLS_DIR=expected/$(TARGET_TRIPLE)-eh
@@ -72,8 +77,9 @@ LIBC_BOTTOM_HALF_ALL_SOURCES = \
 LIBC_BOTTOM_HALF_ALL_SOURCES := $(filter-out $(LIBC_BOTTOM_HALF_SOURCES)/chdir.c,$(LIBC_BOTTOM_HALF_ALL_SOURCES))
 LIBC_BOTTOM_HALF_ALL_SOURCES := $(LIBC_BOTTOM_HALF_ALL_SOURCES) $(LIBC_BOTTOM_HALF_SOURCES)/chdir.c
 
+# shm_open.c is included in the main libc.
 LIBWASI_EMULATED_MMAN_SOURCES = \
-    $(sort $(shell find $(LIBC_BOTTOM_HALF_DIR)/mman -name \*.c))
+    $(filter-out %/shm_open.c,$(sort $(shell find $(LIBC_BOTTOM_HALF_DIR)/mman -name \*.c)))
 LIBWASI_EMULATED_PROCESS_CLOCKS_SOURCES = \
     $(sort $(shell find $(LIBC_BOTTOM_HALF_DIR)/clocks -name \*.c))
 LIBWASI_EMULATED_GETPID_SOURCES = \
@@ -108,6 +114,7 @@ LIBC_TOP_HALF_MUSL_SOURCES = \
         misc/nftw.c \
 	misc/realpath.c \
         misc/syslog.c \
+        mman/shm_open.c \
         errno/strerror.c \
         \
         network/services.c \
@@ -158,6 +165,7 @@ LIBC_TOP_HALF_MUSL_SOURCES = \
         time/asctime_r.c \
         time/ctime.c \
         time/ctime_r.c \
+        time/clock.c \
         time/wcsftime.c \
         time/strptime.c \
         time/difftime.c \
@@ -200,6 +208,10 @@ LIBC_TOP_HALF_MUSL_SOURCES = \
         unistd/ualarm.c \
         unistd/ttyname.c \
         unistd/ttyname_r.c \
+        unistd/chown.c \
+        unistd/fchown.c \
+        unistd/fchownat.c \
+        unistd/lchown.c \
         linux/wait3.c \
         linux/wait4.c \
         linux/epoll.c \
@@ -207,7 +219,14 @@ LIBC_TOP_HALF_MUSL_SOURCES = \
         linux/setgroups.c \
         stat/futimesat.c \
         legacy/getpagesize.c \
+        legacy/getpass.c \
         thread/thrd_sleep.c \
+        wasix/call_dynamic.c \
+        wasix/closure_allocate.c \
+        wasix/closure_free.c \
+        wasix/closure_prepare.c \
+        wasix/reflection.c \
+        wasix/context.c \
     ) \
     $(filter-out %/procfdname.c %/syscall.c %/syscall_ret.c %/vdso.c %/version.c, \
                  $(wildcard $(LIBC_TOP_HALF_MUSL_SRC_DIR)/internal/*.c)) \
@@ -548,13 +567,6 @@ wasix-headers:
 	cargo run --manifest-path tools/wasix-headers/Cargo.toml generate-libc
 
 post-finish: finish
-ifeq ($(TARGET_TRIPLE), wasm32-wasi)
-	cd $(SYSROOT_LIB) && \
-	mv libc.a libc-old.a && \
-	$(AR) -M < $(CURDIR)/tools/append-builtins/$(TARGET_TRIPLE).mri && \
-	rm libc-old.a
-endif
-
 	rm -f sysroot/lib/wasm32-wasi/libc-printscan-log-double.a
 
 $(SYSROOT_LIB)/libc.a: $(LIBC_OBJS)
@@ -700,7 +712,9 @@ finish: startup_files libc
 # alloctor (providing malloc, calloc, free, etc). Skip this step if the build
 # is done without a malloc implementation.
 ifneq ($(MALLOC_IMPL),none)
+ifneq ($(CHECK_SYMBOLS),no)
 finish: check-symbols
+endif
 endif
 
 DEFINED_SYMBOLS = $(SYSROOT_SHARE)/defined-symbols.txt

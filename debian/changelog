@@ -1,3 +1,16 @@
+wasix-libc (2025.12.24.1+ds-1) unstable; urgency=medium
+
+  * New upstream version 2025.12.24.1 (Closes: #1123481)
+  * d/patches: Drop 0003-remove-undefined-symbols.patch as no longer needed
+    with the latest version of wasix-libc
+  * d/patches: Drop 0002-fix-imcompatible-cast.patch as no longer needed
+    with the latest version of clang
+  * d/control: Bump Standards-Version to 4.7.3
+  * d/control: Drop libclang-rt-dev-wasm32 from Build-Depends
+    This package is actually not used at build time.
+
+ -- Fukui Daichi <a.dog.will.talk@akane.waseda.jp>  Sat, 03 Jan 2026 13:53:30 +0000
+
 wasix-libc (2025.07.07.1+ds-1) unstable; urgency=medium
 
   [ Fukui Daichi ]
