@@ -1,0 +1,67 @@
+Description: Fix build with clang 23
+ clang 23 deprecates the `wasm32-wasi` target triple in favor of
+ `wasm32-wasip1`, which makes every compilation fail because of -Werror:
+ .
+   clang: error: argument '--target=wasm32-wasi' is deprecated, use
+   --target=wasm32-wasip1 instead [-Werror,-Wdeprecated]
+ .
+ Pass `--target=wasm32-wasip1` to the compiler instead. Older clang releases
+ (checked with 18, 19, 21 and 22) accept it and predefine exactly the same
+ macros for both triples; with clang 21 the resulting libraries are
+ byte-for-byte identical to the ones built before. TARGET_TRIPLE is kept as
+ `wasm32-wasi` since it is used for the installation paths and the expected
+ metadata directory.
+ .
+ clang 23 also predefines a few new macros (__wasip1__, __MEMORY_SCOPE_CLUSTR,
+ __SIG_ATOMIC_TYPE__, __WCHAR_MIN__, __WINT_MIN__, __SIG_ATOMIC_MIN__) which
+ makes the predefined-macros check in check-symbols fail. Filter them out, as
+ is already done for macros introduced by earlier clang releases, so that the
+ expected metadata stays valid with both the current and the new compiler.
+Author: Fukui Daichi <a.dog.will.talk@akane.waseda.jp>
+Bug-Debian: https://bugs.debian.org/1154036
+Forwarded: not-needed
+Last-Update: 2026-11-22
+---
+--- a/Makefile
++++ b/Makefile
+@@ -44,6 +44,11 @@ BULK_MEMORY_THRESHOLD ?= 32
+ #TARGET_ARCH = wasm32
+ TARGET_TRIPLE = $(TARGET_ARCH)-wasi
+ MULTIARCH_TRIPLE = $(TARGET_ARCH)-wasi
++# Triple passed to the compiler. clang 23 deprecates `wasm32-wasi` in favor of
++# `wasm32-wasip1` (which is fatal with -Werror). Older clang treats both
++# identically, so always use `wasip1` here while keeping TARGET_TRIPLE for the
++# installation paths and the expected metadata directory.
++CLANG_TARGET_TRIPLE = $(TARGET_ARCH)-wasip1
+ 
+ # These variables describe the locations of various files and directories in
+ # the source tree.
+@@ -376,8 +381,8 @@ LIBC_TOP_HALF_ALL_SOURCES = \
+ # Add any extra flags
+ CFLAGS = $(EXTRA_CFLAGS)
+ # Set the target.
+-CFLAGS += --target=$(TARGET_TRIPLE)
+-ASMFLAGS += --target=$(TARGET_TRIPLE)
++CFLAGS += --target=$(CLANG_TARGET_TRIPLE)
++ASMFLAGS += --target=$(CLANG_TARGET_TRIPLE)
+ # WebAssembly floating-point match doesn't trap.
+ # TODO: Add -fno-signaling-nans when the compiler supports it.
+ CFLAGS += -fno-trapping-math
+@@ -758,6 +763,8 @@ check-symbols: startup_files libc
+ 	@# TODO: Undefine __wasm_mutable_globals__ and __wasm_sign_ext__, that are new to
+ 	@# clang 16 for -mcpu=generic.
+ 	@# TODO: As of clang 16, __GNUC_VA_LIST is #defined without a value.
++	@# TODO: Filter out __wasip1__, __MEMORY_SCOPE_CLUSTR, __SIG_ATOMIC_TYPE__ and
++	@# __{WCHAR,WINT,SIG_ATOMIC}_MIN__ that are new to clang 23.
+ 	$(CC) $(CFLAGS) "$(SYSROOT_SHARE)/include-all.c" \
+ 	    -isystem $(SYSROOT_INC) \
+ 	    -std=gnu17 \
+@@ -784,6 +791,8 @@ check-symbols: startup_files libc
+ 	    | sed -e 's/__GNUC_VA_LIST $$/__GNUC_VA_LIST 1/' \
+ 	    | grep -v '^#define __\(BOOL\|INT_\(LEAST\|FAST\)\(8\|16\|32\|64\)\|INT\|LONG\|LLONG\|SHRT\)_WIDTH__' \
+ 	    | grep -v '^#define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_\(1\|2\|4\|8\)' \
++	    | grep -v '^#define __\(WCHAR\|WINT\|SIG_ATOMIC\)_MIN__ ' \
++	    | grep -v '^#define __\(SIG_ATOMIC_TYPE__\|MEMORY_SCOPE_CLUSTR\|wasip1__\) ' \
+ 	    > "$(SYSROOT_SHARE)/predefined-macros.txt"
+ 
+ 	# Check that the computed metadata matches the expected metadata.
