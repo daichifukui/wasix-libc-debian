@@ -5,6 +5,8 @@ set -Eeuxo pipefail
 export TARGET_ARCH=wasm32
 export TARGET_OS=wasix
 
+CHECK_SYMBOLS=${CHECK_SYMBOLS:-yes}
+
 # Build the compiler runtime lib
 mkdir -p build/compiler-rt
 cd build/compiler-rt
@@ -64,7 +66,7 @@ cat > libc-bottom-half/headers/public/wasi/api.h<<EOF
 #include "api_poly.h"
 EOF
 
-make -j 16 -f Makefile-eh
+make CHECK_SYMBOLS=$CHECK_SYMBOLS -j 16 -f Makefile-eh
 rm -f sysroot/lib/wasm32-wasi/libc-printscan-long-double.a
 
 # Build C++ sysroot
@@ -83,12 +85,13 @@ cmake \
     -DCMAKE_BUILD_TYPE=RelWithDebugInfo \
     -DLIBCXX_ENABLE_SHARED:BOOL=OFF \
     -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY:BOOL=OFF \
-    -DLIBCXX_ENABLE_EXCEPTIONS:BOOL=OFF \
+    -DLIBCXX_ENABLE_EXCEPTIONS:BOOL=ON \
     -DLIBCXX_ENABLE_FILESYSTEM:BOOL=ON \
     -DLIBCXX_CXX_ABI=libcxxabi \
     -DLIBCXX_HAS_MUSL_LIBC:BOOL=ON \
     -DLIBCXX_ABI_VERSION=2 \
-    -DLIBCXXABI_ENABLE_EXCEPTIONS:BOOL=OFF \
+    -DLIBCXX_USE_COMPILER_RT=ON \
+    -DLIBCXXABI_ENABLE_EXCEPTIONS:BOOL=ON \
     -DLIBCXXABI_ENABLE_SHARED:BOOL=OFF \
     -DLIBCXXABI_SILENT_TERMINATE:BOOL=ON \
     -DLIBCXXABI_ENABLE_THREADS:BOOL=ON \
@@ -97,14 +100,21 @@ cmake \
     -DLIBCXXABI_BUILD_EXTERNAL_THREAD_LIBRARY:BOOL=OFF \
     -DLIBCXXABI_HAS_WIN32_THREAD_API:BOOL=OFF \
     -DLIBCXXABI_ENABLE_PIC:BOOL=OFF \
-    -DLIBCXXABI_USE_LLVM_UNWINDER:BOOL=OFF \
+    -DLIBCXXABI_USE_LLVM_UNWINDER:BOOL=ON \
+    -DLIBUNWIND_ENABLE_SHARED:BOOL=OFF \
+    -DLIBUNWIND_ENABLE_STATIC:BOOL=ON \
+    -DLIBUNWIND_USE_COMPILER_RT:BOOL=ON \
+    -DLIBUNWIND_ENABLE_THREADS:BOOL=ON \
+    -DLIBUNWIND_HAS_PTHREAD_LIB:BOOL=ON \
+    -DLIBUNWIND_INSTALL_LIBRARY:BOOL=ON \
     -DCMAKE_C_COMPILER_WORKS=ON \
     -DCMAKE_CXX_COMPILER_WORKS=ON \
     -DLLVM_COMPILER_CHECKED=ON \
     -DUNIX:BOOL=ON \
     -DLIBCXX_LIBDIR_SUFFIX=/wasm32-wasi \
     -DLIBCXXABI_LIBDIR_SUFFIX=/wasm32-wasi \
-    -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi" \
+    -DLLVM_LIBDIR_SUFFIX=/wasm32-wasi \
+    -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
     ../../tools/llvm-project/runtimes
 cmake --build . --target install --parallel 16
 cd ../..

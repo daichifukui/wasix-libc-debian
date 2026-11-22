@@ -31,8 +31,6 @@ __clock
 __clock_gettime
 __clock_nanosleep
 __clock_settime
-__clone
-__copy_tls
 __cos
 __cosdf
 __cosl
@@ -371,11 +369,18 @@ __vmlock_lockptr
 __wait
 __wasi_args_get
 __wasi_args_sizes_get
+__wasi_call_dynamic
 __wasi_callback_signal
 __wasi_chdir
 __wasi_clock_res_get
 __wasi_clock_time_get
 __wasi_clock_time_set
+__wasi_closure_allocate
+__wasi_closure_free
+__wasi_closure_prepare
+__wasi_context_create
+__wasi_context_destroy
+__wasi_context_switch
 __wasi_dl_invalid_handle
 __wasi_dlopen
 __wasi_dlsym
@@ -446,7 +451,9 @@ __wasi_proc_exec
 __wasi_proc_exec2
 __wasi_proc_exec3
 __wasi_proc_exit
+__wasi_proc_exit2
 __wasi_proc_fork
+__wasi_proc_fork_env
 __wasi_proc_id
 __wasi_proc_join
 __wasi_proc_parent
@@ -459,6 +466,7 @@ __wasi_proc_snapshot
 __wasi_proc_spawn
 __wasi_proc_spawn2
 __wasi_random_get
+__wasi_reflect_signature
 __wasi_resolve
 __wasi_sched_yield
 __wasi_sock_accept
@@ -558,6 +566,7 @@ __wasilibc_tls_align
 __wasilibc_tls_size
 __wasilibc_unlinkat
 __wasilibc_utimens
+__wasix_context_main
 __wasix_init_tls
 __wasm_call_dtors
 __wasm_sigaction
@@ -686,6 +695,7 @@ cfsetspeed
 chdir
 chdir_legacy
 chmod
+chown
 cimag
 cimagf
 cimagl
@@ -825,6 +835,8 @@ fabsl
 faccessat
 fchmod
 fchmodat
+fchown
+fchownat
 fclose
 fcntl
 fcvt
@@ -988,6 +1000,7 @@ getopt
 getopt_long
 getopt_long_only
 getpagesize
+getpass
 getpeername
 getpgid
 getpgrp
@@ -1126,6 +1139,7 @@ kill
 killpg
 l64a
 labs
+lchown
 lckpwdf
 lcong48
 ldexp
@@ -1524,6 +1538,8 @@ setspent
 setstate
 setuid
 setvbuf
+shm_open
+shm_unlink
 shutdown
 sigaction
 sigaction_external_default
@@ -1746,7 +1762,15 @@ wait3
 wait4
 waitpid
 wasi_thread_start
+wasix_call_dynamic
+wasix_closure_allocate
+wasix_closure_free
+wasix_closure_prepare
+wasix_context_create
+wasix_context_destroy
+wasix_context_switch
 wasix_proc_snapshot
+wasix_reflect_signature
 wcpcpy
 wcpncpy
 wcrtomb

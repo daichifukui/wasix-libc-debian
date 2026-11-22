@@ -480,207 +480,207 @@ typedef uint64_t __wasi_rights_t;
  * If `path_open` is set, includes the right to invoke
  * `path_open` with `fdflags::dsync`.
  */
-#define __WASI_RIGHTS_FD_DATASYNC ((__wasi_rights_t)(1 << 0))
+#define __WASI_RIGHTS_FD_DATASYNC ((__wasi_rights_t)+(1 << 0))
 
 /**
  * The right to invoke `fd_read` and `sock_recv`.
  * If `rights::fd_seek` is set, includes the right to invoke `fd_pread`.
  */
-#define __WASI_RIGHTS_FD_READ ((__wasi_rights_t)(1 << 1))
+#define __WASI_RIGHTS_FD_READ ((__wasi_rights_t)+(1 << 1))
 
 /**
  * The right to invoke `fd_seek`. This flag implies `rights::fd_tell`.
  */
-#define __WASI_RIGHTS_FD_SEEK ((__wasi_rights_t)(1 << 2))
+#define __WASI_RIGHTS_FD_SEEK ((__wasi_rights_t)+(1 << 2))
 
 /**
  * The right to invoke `fd_fdstat_set_flags`.
  */
-#define __WASI_RIGHTS_FD_FDSTAT_SET_FLAGS ((__wasi_rights_t)(1 << 3))
+#define __WASI_RIGHTS_FD_FDSTAT_SET_FLAGS ((__wasi_rights_t)+(1 << 3))
 
 /**
  * The right to invoke `fd_sync`.
  * If `path_open` is set, includes the right to invoke
  * `path_open` with `fdflags::rsync` and `fdflags::dsync`.
  */
-#define __WASI_RIGHTS_FD_SYNC ((__wasi_rights_t)(1 << 4))
+#define __WASI_RIGHTS_FD_SYNC ((__wasi_rights_t)+(1 << 4))
 
 /**
  * The right to invoke `fd_seek` in such a way that the file offset
  * remains unaltered (i.e., `whence::cur` with offset zero), or to
  * invoke `fd_tell`.
  */
-#define __WASI_RIGHTS_FD_TELL ((__wasi_rights_t)(1 << 5))
+#define __WASI_RIGHTS_FD_TELL ((__wasi_rights_t)+(1 << 5))
 
 /**
  * The right to invoke `fd_write` and `sock_send`.
  * If `rights::fd_seek` is set, includes the right to invoke `fd_pwrite`.
  */
-#define __WASI_RIGHTS_FD_WRITE ((__wasi_rights_t)(1 << 6))
+#define __WASI_RIGHTS_FD_WRITE ((__wasi_rights_t)+(1 << 6))
 
 /**
  * The right to invoke `fd_advise`.
  */
-#define __WASI_RIGHTS_FD_ADVISE ((__wasi_rights_t)(1 << 7))
+#define __WASI_RIGHTS_FD_ADVISE ((__wasi_rights_t)+(1 << 7))
 
 /**
  * The right to invoke `fd_allocate`.
  */
-#define __WASI_RIGHTS_FD_ALLOCATE ((__wasi_rights_t)(1 << 8))
+#define __WASI_RIGHTS_FD_ALLOCATE ((__wasi_rights_t)+(1 << 8))
 
 /**
  * The right to invoke `path_create_directory`.
  */
-#define __WASI_RIGHTS_PATH_CREATE_DIRECTORY ((__wasi_rights_t)(1 << 9))
+#define __WASI_RIGHTS_PATH_CREATE_DIRECTORY ((__wasi_rights_t)+(1 << 9))
 
 /**
  * If `path_open` is set, the right to invoke `path_open` with `oflags::creat`.
  */
-#define __WASI_RIGHTS_PATH_CREATE_FILE ((__wasi_rights_t)(1 << 10))
+#define __WASI_RIGHTS_PATH_CREATE_FILE ((__wasi_rights_t)+(1 << 10))
 
 /**
  * The right to invoke `path_link` with the file descriptor as the
  * source directory.
  */
-#define __WASI_RIGHTS_PATH_LINK_SOURCE ((__wasi_rights_t)(1 << 11))
+#define __WASI_RIGHTS_PATH_LINK_SOURCE ((__wasi_rights_t)+(1 << 11))
 
 /**
  * The right to invoke `path_link` with the file descriptor as the
  * target directory.
  */
-#define __WASI_RIGHTS_PATH_LINK_TARGET ((__wasi_rights_t)(1 << 12))
+#define __WASI_RIGHTS_PATH_LINK_TARGET ((__wasi_rights_t)+(1 << 12))
 
 /**
  * The right to invoke `path_open`.
  */
-#define __WASI_RIGHTS_PATH_OPEN ((__wasi_rights_t)(1 << 13))
+#define __WASI_RIGHTS_PATH_OPEN ((__wasi_rights_t)+(1 << 13))
 
 /**
  * The right to invoke `fd_readdir`.
  */
-#define __WASI_RIGHTS_FD_READDIR ((__wasi_rights_t)(1 << 14))
+#define __WASI_RIGHTS_FD_READDIR ((__wasi_rights_t)+(1 << 14))
 
 /**
  * The right to invoke `path_readlink`.
  */
-#define __WASI_RIGHTS_PATH_READLINK ((__wasi_rights_t)(1 << 15))
+#define __WASI_RIGHTS_PATH_READLINK ((__wasi_rights_t)+(1 << 15))
 
 /**
  * The right to invoke `path_rename` with the file descriptor as the source directory.
  */
-#define __WASI_RIGHTS_PATH_RENAME_SOURCE ((__wasi_rights_t)(1 << 16))
+#define __WASI_RIGHTS_PATH_RENAME_SOURCE ((__wasi_rights_t)+(1 << 16))
 
 /**
  * The right to invoke `path_rename` with the file descriptor as the target directory.
  */
-#define __WASI_RIGHTS_PATH_RENAME_TARGET ((__wasi_rights_t)(1 << 17))
+#define __WASI_RIGHTS_PATH_RENAME_TARGET ((__wasi_rights_t)+(1 << 17))
 
 /**
  * The right to invoke `path_filestat_get`.
  */
-#define __WASI_RIGHTS_PATH_FILESTAT_GET ((__wasi_rights_t)(1 << 18))
+#define __WASI_RIGHTS_PATH_FILESTAT_GET ((__wasi_rights_t)+(1 << 18))
 
 /**
  * The right to change a file's size (there is no `path_filestat_set_size`).
  * If `path_open` is set, includes the right to invoke `path_open` with `oflags::trunc`.
  */
-#define __WASI_RIGHTS_PATH_FILESTAT_SET_SIZE ((__wasi_rights_t)(1 << 19))
+#define __WASI_RIGHTS_PATH_FILESTAT_SET_SIZE ((__wasi_rights_t)+(1 << 19))
 
 /**
  * The right to invoke `path_filestat_set_times`.
  */
-#define __WASI_RIGHTS_PATH_FILESTAT_SET_TIMES ((__wasi_rights_t)(1 << 20))
+#define __WASI_RIGHTS_PATH_FILESTAT_SET_TIMES ((__wasi_rights_t)+(1 << 20))
 
 /**
  * The right to invoke `fd_filestat_get`.
  */
-#define __WASI_RIGHTS_FD_FILESTAT_GET ((__wasi_rights_t)(1 << 21))
+#define __WASI_RIGHTS_FD_FILESTAT_GET ((__wasi_rights_t)+(1 << 21))
 
 /**
  * The right to invoke `fd_filestat_set_size`.
  */
-#define __WASI_RIGHTS_FD_FILESTAT_SET_SIZE ((__wasi_rights_t)(1 << 22))
+#define __WASI_RIGHTS_FD_FILESTAT_SET_SIZE ((__wasi_rights_t)+(1 << 22))
 
 /**
  * The right to invoke `fd_filestat_set_times`.
  */
-#define __WASI_RIGHTS_FD_FILESTAT_SET_TIMES ((__wasi_rights_t)(1 << 23))
+#define __WASI_RIGHTS_FD_FILESTAT_SET_TIMES ((__wasi_rights_t)+(1 << 23))
 
 /**
  * The right to invoke `path_symlink`.
  */
-#define __WASI_RIGHTS_PATH_SYMLINK ((__wasi_rights_t)(1 << 24))
+#define __WASI_RIGHTS_PATH_SYMLINK ((__wasi_rights_t)+(1 << 24))
 
 /**
  * The right to invoke `path_remove_directory`.
  */
-#define __WASI_RIGHTS_PATH_REMOVE_DIRECTORY ((__wasi_rights_t)(1 << 25))
+#define __WASI_RIGHTS_PATH_REMOVE_DIRECTORY ((__wasi_rights_t)+(1 << 25))
 
 /**
  * The right to invoke `path_unlink_file`.
  */
-#define __WASI_RIGHTS_PATH_UNLINK_FILE ((__wasi_rights_t)(1 << 26))
+#define __WASI_RIGHTS_PATH_UNLINK_FILE ((__wasi_rights_t)+(1 << 26))
 
 /**
  * If `rights::fd_read` is set, includes the right to invoke `poll_oneoff` to subscribe to `eventtype::fd_read`.
  * If `rights::fd_write` is set, includes the right to invoke `poll_oneoff` to subscribe to `eventtype::fd_write`.
  */
-#define __WASI_RIGHTS_POLL_FD_READWRITE ((__wasi_rights_t)(1 << 27))
+#define __WASI_RIGHTS_POLL_FD_READWRITE ((__wasi_rights_t)+(1 << 27))
 
 /**
  * The right to invoke `sock_shutdown`.
  */
-#define __WASI_RIGHTS_SOCK_SHUTDOWN ((__wasi_rights_t)(1 << 28))
+#define __WASI_RIGHTS_SOCK_SHUTDOWN ((__wasi_rights_t)+(1 << 28))
 
 /**
  * Accept incoming connection
  */
-#define __WASI_RIGHTS_SOCK_ACCEPT ((__wasi_rights_t)(1 << 29))
+#define __WASI_RIGHTS_SOCK_ACCEPT ((__wasi_rights_t)+(1 << 29))
 
 /**
  * Connect to an address
  */
-#define __WASI_RIGHTS_SOCK_CONNECT ((__wasi_rights_t)(1 << 30))
+#define __WASI_RIGHTS_SOCK_CONNECT ((__wasi_rights_t)+(1 << 30))
 
 /**
  * Listen for incoming connection on an address
  */
-#define __WASI_RIGHTS_SOCK_LISTEN ((__wasi_rights_t)(1 << 31))
+#define __WASI_RIGHTS_SOCK_LISTEN ((__wasi_rights_t)+(1 << 31))
 
 /**
  * Bind an address to a socket
  */
-#define __WASI_RIGHTS_SOCK_BIND ((__wasi_rights_t)(1 << 32))
+#define __WASI_RIGHTS_SOCK_BIND ((__wasi_rights_t)+(1 << 32))
 
 /**
  * Receive data on a socket
  */
-#define __WASI_RIGHTS_SOCK_RECV ((__wasi_rights_t)(1 << 33))
+#define __WASI_RIGHTS_SOCK_RECV ((__wasi_rights_t)+(1 << 33))
 
 /**
  * Send data on a socket
  */
-#define __WASI_RIGHTS_SOCK_SEND ((__wasi_rights_t)(1 << 34))
+#define __WASI_RIGHTS_SOCK_SEND ((__wasi_rights_t)+(1 << 34))
 
 /**
  * Retrieve locally bound address on a socket
  */
-#define __WASI_RIGHTS_SOCK_ADDR_LOCAL ((__wasi_rights_t)(1 << 35))
+#define __WASI_RIGHTS_SOCK_ADDR_LOCAL ((__wasi_rights_t)+(1 << 35))
 
 /**
  * Retrieve remote address on a socket
  */
-#define __WASI_RIGHTS_SOCK_ADDR_REMOTE ((__wasi_rights_t)(1 << 36))
+#define __WASI_RIGHTS_SOCK_ADDR_REMOTE ((__wasi_rights_t)+(1 << 36))
 
 /**
  * Receive datagram on a socket
  */
-#define __WASI_RIGHTS_SOCK_RECV_FROM ((__wasi_rights_t)(1 << 37))
+#define __WASI_RIGHTS_SOCK_RECV_FROM ((__wasi_rights_t)+(1 << 37))
 
 /**
  * Send datagram on a socket
  */
-#define __WASI_RIGHTS_SOCK_SEND_TO ((__wasi_rights_t)(1 << 38))
+#define __WASI_RIGHTS_SOCK_SEND_TO ((__wasi_rights_t)+(1 << 38))
 
 /**
  * The type of a file descriptor or file.
@@ -748,22 +748,22 @@ typedef uint16_t __wasi_riflags_t;
 /**
  * Returns the message without removing it from the socket's receive queue.
  */
-#define __WASI_RIFLAGS_RECV_PEEK ((__wasi_riflags_t)(1 << 0))
+#define __WASI_RIFLAGS_RECV_PEEK ((__wasi_riflags_t)+(1 << 0))
 
 /**
  * On byte-stream sockets, block until the full amount of data can be returned.
  */
-#define __WASI_RIFLAGS_RECV_WAITALL ((__wasi_riflags_t)(1 << 1))
+#define __WASI_RIFLAGS_RECV_WAITALL ((__wasi_riflags_t)+(1 << 1))
 
 /**
  * Indicates if the packet should be truncated to the buffer size
  */
-#define __WASI_RIFLAGS_RECV_DATA_TRUNCATED ((__wasi_riflags_t)(1 << 2))
+#define __WASI_RIFLAGS_RECV_DATA_TRUNCATED ((__wasi_riflags_t)+(1 << 2))
 
 /**
  * Return immediately if the read would block.
  */
-#define __WASI_RIFLAGS_RECV_DONT_WAIT ((__wasi_riflags_t)(1 << 3))
+#define __WASI_RIFLAGS_RECV_DONT_WAIT ((__wasi_riflags_t)+(1 << 3))
 
 /**
  * Signal condition.
@@ -1159,7 +1159,7 @@ _Static_assert(_Alignof(__wasi_advice_t) == 1, "witx calculated align");
 *** Hidden type
 typedef uint16_t __wasi_fdflags_t;
 
-#define __WASI_FDFLAGS_HIDDEN ((__wasi_fdflags_t)(1 << 0))
+#define __WASI_FDFLAGS_HIDDEN ((__wasi_fdflags_t)+(1 << 0))
 
  */
 /**
@@ -1195,21 +1195,21 @@ _Static_assert(_Alignof(__wasi_device_t) == 8, "witx calculated align");
 *** Hidden type
 typedef uint16_t __wasi_fstflags_t;
 
-#define __WASI_FSTFLAGS_HIDDEN ((__wasi_fstflags_t)(1 << 0))
+#define __WASI_FSTFLAGS_HIDDEN ((__wasi_fstflags_t)+(1 << 0))
 
  */
 /**
 *** Hidden type
 typedef uint32_t __wasi_lookupflags_t;
 
-#define __WASI_LOOKUPFLAGS_HIDDEN ((__wasi_lookupflags_t)(1 << 0))
+#define __WASI_LOOKUPFLAGS_HIDDEN ((__wasi_lookupflags_t)+(1 << 0))
 
  */
 /**
 *** Hidden type
 typedef uint16_t __wasi_oflags_t;
 
-#define __WASI_OFLAGS_HIDDEN ((__wasi_oflags_t)(1 << 0))
+#define __WASI_OFLAGS_HIDDEN ((__wasi_oflags_t)+(1 << 0))
 
  */
 /**
@@ -1279,7 +1279,7 @@ _Static_assert(_Alignof(__wasi_eventtype_t) == 1, "witx calculated align");
 *** Hidden type
 typedef uint16_t __wasi_eventrwflags_t;
 
-#define __WASI_EVENTRWFLAGS_HIDDEN ((__wasi_eventrwflags_t)(1 << 0))
+#define __WASI_EVENTRWFLAGS_HIDDEN ((__wasi_eventrwflags_t)+(1 << 0))
 
  */
 /**
@@ -1322,7 +1322,7 @@ _Static_assert(offsetof(__wasi_event_t, fd_readwrite) == 16, "witx calculated of
 *** Hidden type
 typedef uint16_t __wasi_subclockflags_t;
 
-#define __WASI_SUBCLOCKFLAGS_HIDDEN ((__wasi_subclockflags_t)(1 << 0))
+#define __WASI_SUBCLOCKFLAGS_HIDDEN ((__wasi_subclockflags_t)+(1 << 0))
 
  */
 /**
@@ -1401,7 +1401,7 @@ _Static_assert(_Alignof(__wasi_exitcode_t) == 4, "witx calculated align");
 *** Hidden type
 typedef uint16_t __wasi_roflags_t;
 
-#define __WASI_ROFLAGS_HIDDEN ((__wasi_roflags_t)(1 << 0))
+#define __WASI_ROFLAGS_HIDDEN ((__wasi_roflags_t)+(1 << 0))
 
  */
 /**
@@ -1412,13 +1412,13 @@ typedef uint16_t __wasi_siflags_t;
 /**
  * Return immediately if the write would block.
  */
-#define __WASI_SIFLAGS_SEND_DONT_WAIT ((__wasi_siflags_t)(1 << 0))
+#define __WASI_SIFLAGS_SEND_DONT_WAIT ((__wasi_siflags_t)+(1 << 0))
 
 /**
 *** Hidden type
 typedef uint8_t __wasi_sdflags_t;
 
-#define __WASI_SDFLAGS_HIDDEN ((__wasi_sdflags_t)(1 << 0))
+#define __WASI_SDFLAGS_HIDDEN ((__wasi_sdflags_t)+(1 << 0))
 
  */
 /**
@@ -1644,7 +1644,7 @@ typedef uint16_t __wasi_eventfdflags_t;
 /**
  * Indicates if this event file description will run as a semaphore
  */
-#define __WASI_EVENTFDFLAGS_SEMAPHORE ((__wasi_eventfdflags_t)(1 << 0))
+#define __WASI_EVENTFDFLAGS_SEMAPHORE ((__wasi_eventfdflags_t)+(1 << 0))
 
 /**
  * Actual file descriptor flags. The fdflags type from WASI corresponds to
@@ -1656,7 +1656,7 @@ typedef uint16_t __wasi_fdflagsext_t;
 /**
  * Close this file in the child process when spawning one.
  */
-#define __WASI_FDFLAGSEXT_CLOEXEC ((__wasi_fdflagsext_t)(1 << 0))
+#define __WASI_FDFLAGSEXT_CLOEXEC ((__wasi_fdflagsext_t)+(1 << 0))
 
 /**
  * Rect that represents the TTY.
@@ -2540,22 +2540,22 @@ typedef uint8_t __wasi_stream_security_t;
 /**
  * Unencrypted
  */
-#define __WASI_STREAM_SECURITY_UNENCRYPTED ((__wasi_stream_security_t)(1 << 0))
+#define __WASI_STREAM_SECURITY_UNENCRYPTED ((__wasi_stream_security_t)+(1 << 0))
 
 /**
  * Any encryption
  */
-#define __WASI_STREAM_SECURITY_ANY_ENCRYPTION ((__wasi_stream_security_t)(1 << 1))
+#define __WASI_STREAM_SECURITY_ANY_ENCRYPTION ((__wasi_stream_security_t)+(1 << 1))
 
 /**
  * Classic encryption
  */
-#define __WASI_STREAM_SECURITY_CLASSIC_ENCRYPTION ((__wasi_stream_security_t)(1 << 2))
+#define __WASI_STREAM_SECURITY_CLASSIC_ENCRYPTION ((__wasi_stream_security_t)+(1 << 2))
 
 /**
  * Double encryption
  */
-#define __WASI_STREAM_SECURITY_DOUBLE_ENCRYPTION ((__wasi_stream_security_t)(1 << 3))
+#define __WASI_STREAM_SECURITY_DOUBLE_ENCRYPTION ((__wasi_stream_security_t)+(1 << 3))
 
 /**
  * Hardware address (MAC)
@@ -3292,12 +3292,12 @@ typedef uint32_t __wasi_join_flags_t;
 /**
  * Non-blocking join on the process
  */
-#define __WASI_JOIN_FLAGS_NON_BLOCKING ((__wasi_join_flags_t)(1 << 0))
+#define __WASI_JOIN_FLAGS_NON_BLOCKING ((__wasi_join_flags_t)+(1 << 0))
 
 /**
  * Return if a process is stopped
  */
-#define __WASI_JOIN_FLAGS_WAKE_STOPPED ((__wasi_join_flags_t)(1 << 1))
+#define __WASI_JOIN_FLAGS_WAKE_STOPPED ((__wasi_join_flags_t)+(1 << 1))
 
 /**
  * What has happened with the proccess when we joined on it
@@ -3373,12 +3373,12 @@ typedef uint16_t __wasi_thread_flags_t;
 /**
  * tsd_used
  */
-#define __WASI_THREAD_FLAGS_TSD_USED ((__wasi_thread_flags_t)(1 << 0))
+#define __WASI_THREAD_FLAGS_TSD_USED ((__wasi_thread_flags_t)+(1 << 0))
 
 /**
  * dlerror_flag
  */
-#define __WASI_THREAD_FLAGS_DLERROR_FLAG ((__wasi_thread_flags_t)(1 << 1))
+#define __WASI_THREAD_FLAGS_DLERROR_FLAG ((__wasi_thread_flags_t)+(1 << 1))
 
 /**
  * represents the state of a thread
@@ -3562,21 +3562,21 @@ _Static_assert(offsetof(__wasi_thread_start_t, guard_size) == 60, "witx calculat
  */
 typedef uint32_t __wasi_epoll_type_t;
 
-#define __WASI_EPOLL_TYPE_EPOLLIN ((__wasi_epoll_type_t)(1 << 0))
+#define __WASI_EPOLL_TYPE_EPOLLIN ((__wasi_epoll_type_t)+(1 << 0))
 
-#define __WASI_EPOLL_TYPE_EPOLLOUT ((__wasi_epoll_type_t)(1 << 1))
+#define __WASI_EPOLL_TYPE_EPOLLOUT ((__wasi_epoll_type_t)+(1 << 1))
 
-#define __WASI_EPOLL_TYPE_EPOLLRDHUP ((__wasi_epoll_type_t)(1 << 2))
+#define __WASI_EPOLL_TYPE_EPOLLRDHUP ((__wasi_epoll_type_t)+(1 << 2))
 
-#define __WASI_EPOLL_TYPE_EPOLLPRI ((__wasi_epoll_type_t)(1 << 3))
+#define __WASI_EPOLL_TYPE_EPOLLPRI ((__wasi_epoll_type_t)+(1 << 3))
 
-#define __WASI_EPOLL_TYPE_EPOLLERR ((__wasi_epoll_type_t)(1 << 4))
+#define __WASI_EPOLL_TYPE_EPOLLERR ((__wasi_epoll_type_t)+(1 << 4))
 
-#define __WASI_EPOLL_TYPE_EPOLLHUP ((__wasi_epoll_type_t)(1 << 5))
+#define __WASI_EPOLL_TYPE_EPOLLHUP ((__wasi_epoll_type_t)+(1 << 5))
 
-#define __WASI_EPOLL_TYPE_EPOLLET ((__wasi_epoll_type_t)(1 << 6))
+#define __WASI_EPOLL_TYPE_EPOLLET ((__wasi_epoll_type_t)+(1 << 6))
 
-#define __WASI_EPOLL_TYPE_EPOLLONESHOT ((__wasi_epoll_type_t)(1 << 7))
+#define __WASI_EPOLL_TYPE_EPOLLONESHOT ((__wasi_epoll_type_t)+(1 << 7))
 
 /**
  * epoll ctl
@@ -3744,17 +3744,102 @@ _Static_assert(_Alignof(__wasi_dl_handle_t) == 4, "witx calculated align");
  */
 typedef uint32_t __wasi_dl_flags_t;
 
-#define __WASI_DL_FLAGS_LAZY ((__wasi_dl_flags_t)(1 << 0))
+#define __WASI_DL_FLAGS_LAZY ((__wasi_dl_flags_t)+(1 << 0))
 
-#define __WASI_DL_FLAGS_NOW ((__wasi_dl_flags_t)(1 << 1))
+#define __WASI_DL_FLAGS_NOW ((__wasi_dl_flags_t)+(1 << 1))
 
-#define __WASI_DL_FLAGS_GLOBAL ((__wasi_dl_flags_t)(1 << 2))
+#define __WASI_DL_FLAGS_GLOBAL ((__wasi_dl_flags_t)+(1 << 2))
 
-#define __WASI_DL_FLAGS_NOLOAD ((__wasi_dl_flags_t)(1 << 3))
+#define __WASI_DL_FLAGS_NOLOAD ((__wasi_dl_flags_t)+(1 << 3))
 
-#define __WASI_DL_FLAGS_NODELETE ((__wasi_dl_flags_t)(1 << 4))
+#define __WASI_DL_FLAGS_NODELETE ((__wasi_dl_flags_t)+(1 << 4))
 
-#define __WASI_DL_FLAGS_DEEPBIND ((__wasi_dl_flags_t)(1 << 5))
+#define __WASI_DL_FLAGS_DEEPBIND ((__wasi_dl_flags_t)+(1 << 5))
+
+/**
+ * A function pointer into the __indirect function table.
+ */
+typedef __wasi_uint_t __wasi_function_pointer_t;
+
+_Static_assert(sizeof(__wasi_function_pointer_t) == 4, "witx calculated size");
+_Static_assert(_Alignof(__wasi_function_pointer_t) == 4, "witx calculated align");
+
+/**
+ * The type of a WASM value represented at runtime for use with the wasix closures API.
+ * 
+ * For now only number types are supported, but this may be extended in the future to include references
+ */
+typedef uint8_t __wasi_wasm_value_type_t;
+
+/**
+ * A i32 value.
+ */
+#define __WASI_WASM_VALUE_TYPE_I32 (UINT8_C(0))
+
+/**
+ * A i64 value.
+ */
+#define __WASI_WASM_VALUE_TYPE_I64 (UINT8_C(1))
+
+/**
+ * A f32 value.
+ */
+#define __WASI_WASM_VALUE_TYPE_F32 (UINT8_C(2))
+
+/**
+ * A f64 value.
+ */
+#define __WASI_WASM_VALUE_TYPE_F64 (UINT8_C(3))
+
+/**
+ * A v128 value.
+ */
+#define __WASI_WASM_VALUE_TYPE_V128 (UINT8_C(4))
+
+_Static_assert(sizeof(__wasi_wasm_value_type_t) == 1, "witx calculated size");
+_Static_assert(_Alignof(__wasi_wasm_value_type_t) == 1, "witx calculated align");
+
+/**
+ * A list of WASM value types.
+ */
+/**
+ * Information about the signature of a function
+ */
+typedef struct __wasi_reflection_result_t {
+    /**
+     * Cacheable is set if the signature of the function will not change in the future
+     */
+    __wasi_bool_t cacheable;
+
+    /**
+     * Number of arguments of the function.
+     * 0 if the function does not exist
+     */
+    uint16_t arguments;
+
+    /**
+     * Number of results of the function.
+     * 0 if the function does not exist
+     */
+    uint16_t results;
+
+} __wasi_reflection_result_t;
+
+_Static_assert(sizeof(__wasi_reflection_result_t) == 6, "witx calculated size");
+_Static_assert(_Alignof(__wasi_reflection_result_t) == 2, "witx calculated align");
+_Static_assert(offsetof(__wasi_reflection_result_t, cacheable) == 0, "witx calculated offset");
+_Static_assert(offsetof(__wasi_reflection_result_t, arguments) == 2, "witx calculated offset");
+_Static_assert(offsetof(__wasi_reflection_result_t, results) == 4, "witx calculated offset");
+
+/**
+ * Opaque identifier referring to a WASIX context.
+ * 
+ * See wasix/context.h for more details
+ */
+typedef uint64_t __wasi_context_id_t;
+
+_Static_assert(sizeof(__wasi_context_id_t) == 8, "witx calculated size");
+_Static_assert(_Alignof(__wasi_context_id_t) == 8, "witx calculated align");
 
 /**
  * @defgroup wasix_32v1
@@ -4108,6 +4193,34 @@ __wasi_errno_t __wasi_proc_fork(
     __wasi_bool_t copy_memory,
     __wasi_pid_t *retptr0
 ) __attribute__((__warn_unused_result__));
+/**
+ * Forks only the environment of the current process into a new subprocess,
+ * without modifying the control flow. The semantics match up with the
+ * traditional `vfork` system call. It is important to note that this
+ * will not setup anything related to control flow - the new process
+ * will continue in the same memory and call stack as the parent process.
+ * After calling this function the next successful call to proc_exit or
+ * proc_exec will return (which it normally does not). After such a
+ * return the environment is set back to that of the parent process.
+ * Opposed to vforking with proc_fork the control flow will NOT be
+ * moved back to the point where proc_fork was called.
+ * 
+ * This function is intended to be used in conjunction with
+ * setjmp/longjmp to build a lightweight implementation of vforking.
+ */
+__wasi_errno_t __wasi_proc_fork_env(
+    __wasi_pid_t *retptr0
+) __attribute__((__warn_unused_result__));
+/**
+ * This is similar to `proc_exit` but it will switch back into the parent process
+ * and return control there if we are in a `proc_fork_env` (vfork) context.
+ */
+void __wasi_proc_exit2(
+    /**
+     * The exit code returned by the process.
+     */
+    __wasi_exitcode_t rval
+);
 /**
  * execv()  executes  the  program  referred to by pathname.  This causes the
  * program that is currently being run by the calling process to  be  replaced
@@ -4981,6 +5094,195 @@ __wasi_errno_t __wasi_dlsym(
     uint8_t * err_buf,
     __wasi_size_t err_buf_len,
     __wasi_size_t *retptr0
+) __attribute__((__warn_unused_result__));
+/**
+ * Call a function pointer with dynamic parameters.
+ */
+__wasi_errno_t __wasi_call_dynamic(
+    /**
+     * An index into the __indirect_function_table
+     * 
+     * Your module needs to either import or export the table to be able
+     * to call this function.
+     */
+    __wasi_function_pointer_t function_id,
+    /**
+     * A buffer with the parameters to pass to the function.
+     * This buffer is expected to contain all parameters sequentially
+     * 
+     * For example if the function takes an i32 and an i64, the
+     * buffer will be 12 bytes long, with the first 4 bytes
+     * being the i32 and the next 8 bytes being the i64.
+     */
+    const uint8_t *values,
+    /**
+     * The length of the array pointed to by `values`.
+     */
+    size_t values_len,
+    /**
+     * A pointer to a buffer for the results of the function call.
+     * 
+     * In most cases this will be a single value, but it could also
+     * contain multiple values. The same rules apply as for the
+     * parameters, i.e. the buffer needs to be large enough
+     * to hold all the results sequentially.
+     */
+    uint8_t * results,
+    __wasi_pointersize_t results_len,
+    /**
+     * 
+     * If this is set to true, the function will return an error if the
+     * length and types of the parameters and results do not match the
+     * function signature.
+     * 
+     * If this is set to false, the function will not perform any checks.
+     * Any missing bytes will be assumed to be zero and any extra bytes
+     * will be ignored.
+     */
+    __wasi_bool_t strict
+) __attribute__((__warn_unused_result__));
+/**
+ * Prepare a closure for execution.
+ */
+__wasi_errno_t __wasi_closure_prepare(
+    /**
+     * A index into the indirect function table that points to the function that will be called when the closure is executed.
+     * 
+     * That function needs to conform to the following signature:
+     *   uint8_t* values - a pointer to a buffer containing the arguments. See call_dynamic for more details.
+     *   uint8_t* results - a pointer to a buffer where the results will be written. See call_dynamic for more details.
+     *   void* user_data_ptr - the user_data_ptr that was passed to closure_prepare
+     */
+    __wasi_function_pointer_t backing_function_id,
+    /**
+     * An index into the indirect function table that was previously allocated with closure_alloc
+     * 
+     * After closure_prepare the slot in the indirect function table will contain a funcref to a closure with the requested signature.
+     * Every call to the closure will be translated to a call to the backing function.
+     */
+    __wasi_function_pointer_t closure_id,
+    /**
+     * A list of types of the arguments that the closure will take.
+     */
+    const __wasi_wasm_value_type_t *argument_types,
+    /**
+     * The length of the array pointed to by `argument_types`.
+     */
+    size_t argument_types_len,
+    /**
+     * A list of types that the closure will return.
+     */
+    const __wasi_wasm_value_type_t *result_types,
+    /**
+     * The length of the array pointed to by `result_types`.
+     */
+    size_t result_types_len,
+    /**
+     * A pointer to a buffer that will be passed to the closure when it is executed.
+     */
+    uint8_t * user_data_ptr
+) __attribute__((__warn_unused_result__));
+/**
+ * Allocate a closure for use with the closure_prepare function.
+ */
+__wasi_errno_t __wasi_closure_allocate(
+    __wasi_function_pointer_t *retptr0
+) __attribute__((__warn_unused_result__));
+/**
+ * Free a closure that was previously allocated with closure_allocate.
+ * 
+ * After this call it is undefined what happens when you call the funcref at the index specified by closure_id.
+ */
+__wasi_errno_t __wasi_closure_free(
+    /**
+     * An index into the indirect function table that was previously allocated with closure_allocate
+     */
+    __wasi_function_pointer_t closure_id
+) __attribute__((__warn_unused_result__));
+/**
+ * Provides information about the signature of a function in the indirect
+ * function table at runtime.
+ * 
+ * ### Errors
+ * 
+ * Besides the standard error codes, `reflect_signature` may set `errno` to the
+ * following errors:
+ * 
+ * - EINVAL: The function pointer is not valid, i.e. it does not point to a
+ * function in the indirect function table or the function has a unsupported
+ * signature. The sizes in the result are undefined in this case.
+ * 
+ * - EOVERFLOW: The argument_types and result_types buffers were not big enough
+ * to hold the signature. They will be left unchanged. The reflection result
+ * will be valid.
+ * @return
+ * The number of arguments and results and whether this result is cacheable.
+ */
+__wasi_errno_t __wasi_reflect_signature(
+    /**
+     * An index into the indirect function table.
+     * 
+     * If there is no function at the requested slot, `EINVAL` will be returned.
+     */
+    __wasi_function_pointer_t function_id,
+    /**
+     * A buffer for a list of types that the function takes as arguments.
+     * 
+     * - If the buffer is too small to hold all argument types, it and
+     * `result_types` remain untouched, and `EOVERFLOW` is returned.
+     * - If the buffer is big enough, the types will be written to the buffer.
+     * - If the buffer is too big, all remaining bytes will be unchanged.
+     * 
+     * If the `argument_types_len` is 0 this buffer is never accessed and can be
+     * null.
+     */
+    __wasi_wasm_value_type_t * argument_types,
+    /**
+     * Size of the buffer for argument types.
+     */
+    uint16_t argument_types_len,
+    /**
+     * A buffer for a list of types that the function returns as results.
+     * 
+     * - If the buffer is too small to hold all argument types, it and
+     * `argument_types` remain untouched, and `EOVERFLOW` is returned.
+     * - If  the buffer is big enough, the types will be written to the buffer.
+     * - If the buffer is too big, all remaining bytes will be unchanged.
+     * 
+     * If the `result_types_len` is 0 this buffer is never accessed and can be
+     * null.
+     */
+    __wasi_wasm_value_type_t * result_types,
+    /**
+     * Size of the buffer for result types.
+     */
+    uint16_t result_types_len,
+    __wasi_reflection_result_t *retptr0
+) __attribute__((__warn_unused_result__));
+/**
+ * Create a new context.
+ * 
+ * See wasix/context.h for more details
+ */
+__wasi_errno_t __wasi_context_create(
+    __wasi_context_id_t * new_context_ptr,
+    __wasi_function_pointer_t entrypoint
+) __attribute__((__warn_unused_result__));
+/**
+ * Suspend the active context and resume another.
+ * 
+ * See wasix/context.h for more details
+ */
+__wasi_errno_t __wasi_context_switch(
+    __wasi_context_id_t next_context
+) __attribute__((__warn_unused_result__));
+/**
+ * Destroy a suspended or terminated context.
+ * 
+ * See wasix/context.h for more details
+ */
+__wasi_errno_t __wasi_context_destroy(
+    __wasi_context_id_t context
 ) __attribute__((__warn_unused_result__));
 /** @} */
 
