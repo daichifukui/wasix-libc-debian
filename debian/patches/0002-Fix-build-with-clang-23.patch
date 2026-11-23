@@ -1,26 +1,31 @@
-Description: Fix build with clang 23
- clang 23 deprecates the `wasm32-wasi` target triple in favor of
+Description: Fix build with clang 22 and later
+ clang 22 deprecates the `wasm32-wasi` target triple in favor of
  `wasm32-wasip1`, which makes every compilation fail because of -Werror:
  .
    clang: error: argument '--target=wasm32-wasi' is deprecated, use
    --target=wasm32-wasip1 instead [-Werror,-Wdeprecated]
  .
  Pass `--target=wasm32-wasip1` to the compiler instead. Older clang releases
- (checked with 18, 19, 21 and 22) accept it and predefine exactly the same
- macros for both triples; with clang 21 the resulting libraries are
- byte-for-byte identical to the ones built before. TARGET_TRIPLE is kept as
- `wasm32-wasi` since it is used for the installation paths and the expected
- metadata directory.
+ (checked with 18, 19 and 21) accept it and predefine exactly the same
+ macros for both triples, and so do clang 22 and 23; with clang 21 the
+ resulting libraries are byte-for-byte identical to the ones built before.
+ TARGET_TRIPLE is kept as `wasm32-wasi` since it is used for the
+ installation paths and the expected metadata directory.
  .
  clang 23 also predefines a few new macros (__wasip1__, __MEMORY_SCOPE_CLUSTR,
  __SIG_ATOMIC_TYPE__, __WCHAR_MIN__, __WINT_MIN__, __SIG_ATOMIC_MIN__) which
  makes the predefined-macros check in check-symbols fail. Filter them out, as
  is already done for macros introduced by earlier clang releases, so that the
  expected metadata stays valid with both the current and the new compiler.
+ .
+ Upstream is affected as well: Makefile-eh, used by the build32-eh*.sh
+ scripts but not by the Debian package, passes the same target and needs the
+ same change there.
 Author: Fukui Daichi <a.dog.will.talk@akane.waseda.jp>
+Bug: https://github.com/wasix-org/wasix-libc/issues/106
 Bug-Debian: https://bugs.debian.org/1154036
-Forwarded: not-needed
-Last-Update: 2026-11-22
+Forwarded: no
+Last-Update: 2026-11-23
 ---
 --- a/Makefile
 +++ b/Makefile
