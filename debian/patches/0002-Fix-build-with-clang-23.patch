@@ -51,8 +51,8 @@ Last-Update: 2026-11-22
  	@# TODO: Undefine __wasm_mutable_globals__ and __wasm_sign_ext__, that are new to
  	@# clang 16 for -mcpu=generic.
  	@# TODO: As of clang 16, __GNUC_VA_LIST is #defined without a value.
-+	@# TODO: Filter out __wasip1__, __MEMORY_SCOPE_CLUSTR, __SIG_ATOMIC_TYPE__ and
-+	@# __{WCHAR,WINT,SIG_ATOMIC}_MIN__ that are new to clang 23.
++	@# __wasip1__, __MEMORY_SCOPE_CLUSTR, __SIG_ATOMIC_TYPE__ and
++	@# __{WCHAR,WINT,SIG_ATOMIC}_MIN__ are new to clang 23 and filtered out below.
  	$(CC) $(CFLAGS) "$(SYSROOT_SHARE)/include-all.c" \
  	    -isystem $(SYSROOT_INC) \
  	    -std=gnu17 \
