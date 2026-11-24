@@ -1,31 +1,20 @@
 Description: Fix build with clang 22 and later
- clang 22 deprecates the `wasm32-wasi` target triple in favor of
- `wasm32-wasip1`, which makes every compilation fail because of -Werror:
+ Since clang 22, --target=wasm32-wasi is deprecated in favor of
+ wasm32-wasip1, which is fatal with -Werror. Pass wasm32-wasip1 to the
+ compiler; older clang releases accept it and predefine the same macros
+ for both triples. TARGET_TRIPLE stays wasm32-wasi for the installation
+ paths and the expected metadata.
  .
-   clang: error: argument '--target=wasm32-wasi' is deprecated, use
-   --target=wasm32-wasip1 instead [-Werror,-Wdeprecated]
+ Also filter out the predefined macros new to clang 23 in check-symbols,
+ so that the expected metadata matches with both old and new clang.
  .
- Pass `--target=wasm32-wasip1` to the compiler instead. Older clang releases
- (checked with 18, 19 and 21) accept it and predefine exactly the same
- macros for both triples, and so do clang 22 and 23; with clang 21 the
- resulting libraries are byte-for-byte identical to the ones built before.
- TARGET_TRIPLE is kept as `wasm32-wasi` since it is used for the
- installation paths and the expected metadata directory.
- .
- clang 23 also predefines a few new macros (__wasip1__, __MEMORY_SCOPE_CLUSTR,
- __SIG_ATOMIC_TYPE__, __WCHAR_MIN__, __WINT_MIN__, __SIG_ATOMIC_MIN__) which
- makes the predefined-macros check in check-symbols fail. Filter them out, as
- is already done for macros introduced by earlier clang releases, so that the
- expected metadata stays valid with both the current and the new compiler.
- .
- Upstream is affected as well: Makefile-eh, used by the build32-eh*.sh
- scripts but not by the Debian package, passes the same target and needs the
- same change there.
+ Upstream's Makefile-eh, not used by the Debian package, needs the same
+ change.
 Author: Fukui Daichi <a.dog.will.talk@akane.waseda.jp>
 Bug: https://github.com/wasix-org/wasix-libc/issues/106
 Bug-Debian: https://bugs.debian.org/1154036
 Forwarded: no
-Last-Update: 2026-11-23
+Last-Update: 2026-11-24
 ---
 --- a/Makefile
 +++ b/Makefile
