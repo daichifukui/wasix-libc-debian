@@ -1,8 +1,9 @@
 #!/usr/bin/make -f
 
-export NM = llvm-nm
-export AR = llvm-ar
-export CC = clang
+# Pass the toolchain on the make command line so that it takes precedence
+# over CC/AR/NM coming from the environment or MAKEFLAGS (e.g. CC=gcc).
+TOOLCHAIN = CC=clang AR=llvm-ar NM=llvm-nm
+
 export TARGET_OS = wasix
 export TARGET_ARCH = wasm32
 
@@ -10,12 +11,12 @@ export TARGET_ARCH = wasm32
 	dh $@
 
 override_dh_auto_build:
-	dh_auto_build -- finish
+	dh_auto_build -- $(TOOLCHAIN) finish
 
 override_dh_installexamples:
 	dh_installexamples -Xgitignore
 
 
 override_dh_auto_install:
-	dh_auto_install -- INSTALL_DIR=$(CURDIR)/debian/tmp/usr
+	dh_auto_install -- $(TOOLCHAIN) INSTALL_DIR=$(CURDIR)/debian/tmp/usr
 	find $(CURDIR)/debian/tmp/usr -type d -empty -delete

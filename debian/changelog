@@ -6,6 +6,9 @@ wasix-libc (2025.12.24.1+ds-2) UNRELEASED; urgency=medium
       paths keep using wasm32-wasi.
     - Filter out the predefined macros new to clang 23 in check-symbols,
       so that the expected metadata matches with both clang 21 and 23.
+  * d/rules: Pass CC, AR and NM on the make command line, so that the
+    package is always built with clang/llvm even if CC=gcc comes from the
+    environment or MAKEFLAGS.
 
  -- Fukui Daichi <a.dog.will.talk@akane.waseda.jp>  Sun, 22 Nov 2026 16:00:00 +0000
 
