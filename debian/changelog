@@ -13,6 +13,9 @@ wasix-libc (2025.12.24.1+ds-2) UNRELEASED; urgency=medium
     libwasi-emulated-getpid sources at libc-bottom-half/sources/getpid,
     which does not exist (getpid() is implemented in sources/getpid.c and
     is part of libc.a), so it had no effect on the built package.
+  * d/copyright: Drop libclang_rt.builtins-wasm32.a from Files-Excluded.
+    It was removed upstream in 2025.07.01.1, and the stale entry makes
+    uscan/mk-origtargz warn that no files matched the excluded pattern.
 
  -- Fukui Daichi <a.dog.will.talk@akane.waseda.jp>  Sun, 22 Nov 2026 16:00:00 +0000
 
