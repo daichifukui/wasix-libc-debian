@@ -4,6 +4,9 @@ Upstream-Contact: Johnathan Sharratt <johnathan.sharratt@gmail.com>
 Source: https://github.com/wasix-org/wasix-libc
 Files-Excluded:
  libcommon-tag-stubs.a
+ tools/llvm-project
+ tools/wasi-headers/WASI
+ tools/wasix-headers/WASI
 
 Files: *
 Copyright:
