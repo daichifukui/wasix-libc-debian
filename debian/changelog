@@ -16,6 +16,7 @@ wasix-libc (2025.12.24.1+ds-2) UNRELEASED; urgency=medium
   * d/copyright: Drop libclang_rt.builtins-wasm32.a from Files-Excluded.
     It was removed upstream in 2025.07.01.1, and the stale entry makes
     uscan/mk-origtargz warn that no files matched the excluded pattern.
+  * d/watch: Convert to format version 5 (older-debian-watch-file-standard).
 
  -- Fukui Daichi <a.dog.will.talk@akane.waseda.jp>  Sun, 22 Nov 2026 16:00:00 +0000
 

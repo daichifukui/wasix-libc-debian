@@ -1,15 +1,15 @@
-# https://salsa.debian.org/snippets/95
+Version: 5
+
 # https://wiki.debian.org/debian/watch
 # uscan(1) configuration file.
-version=4
-
-opts="\
-pgpmode=none,\
-compression=xz,\
-repack,repacksuffix=+ds,\
-dversionmangle=s{[+~](dfsg|ds)\d*}{},\
-uversionmangle=s{[\-]}{.}g,\
-filenamemangle=s%v?@ANY_VERSION@%@PACKAGE@-$1.tar.xz%,\
-searchmode=plain,\
-" https://api.github.com/repos/wasix-org/wasix-libc/releases?per_page=99 \
-  https://api.github.com/repos/[^/]+/[^/]+/tarball/v?([\d.\-]+) debian uupdate
+Source: https://api.github.com/repos/wasix-org/wasix-libc/releases?per_page=99
+Matching-Pattern: https://api.github.com/repos/[^/]+/[^/]+/tarball/v?([\d.\-]+)
+Searchmode: plain
+Pgpmode: none
+Uversionmangle: s{[\-]}{.}g
+Dversionmangle: s{[+~](dfsg|ds)\d*}{}
+Filenamemangle: s%v?@ANY_VERSION@%@PACKAGE@-$1.tar.xz%
+Compression: xz
+Repack: yes
+Repacksuffix: +ds
+Update-Script: uupdate
