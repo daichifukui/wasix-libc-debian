@@ -8,7 +8,7 @@ export TARGET_OS = wasix
 export TARGET_ARCH = wasm32
 
 %:
-	dh $@
+	dh $@ --without single-binary
 
 override_dh_auto_build:
 	dh_auto_build -- $(TOOLCHAIN) finish

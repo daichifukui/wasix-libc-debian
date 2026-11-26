@@ -1,16 +1,13 @@
 Source: wasix-libc
 Section: devel
-Priority: optional
 Maintainer: Fukui Daichi <a.dog.will.talk@akane.waseda.jp>
-Build-Depends: debhelper-compat (= 13), clang, llvm
-Standards-Version: 4.7.3
+Build-Depends: debhelper-compat (= 14), clang, llvm
+Standards-Version: 4.7.4
 Homepage: https://github.com/wasix-org/wasix-libc
-Rules-Requires-Root: no
 
 Package: wasix-libc
 Architecture: any
 Multi-Arch: foreign
-Depends: ${misc:Depends}, ${shlibs:Depends}
 Conflicts: wasi-libc
 Description: wasix libc implementation for WebAssembly
  This fork of wasi-libc extends libc with the missing functionality needed to
