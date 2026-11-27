@@ -29,6 +29,8 @@ wasix-libc (2025.12.24.1+ds-2) UNRELEASED; urgency=medium
   * d/copyright: Exclude the empty git submodule directories
     tools/llvm-project and tools/{wasi,wasix}-headers/WASI, which made
     dpkg-source warn about ignoring their deletion.
+  * d/rules: Copy the built sysroot in override_dh_auto_install instead of
+    running "make install", which compiled the whole library a second time.
 
  -- Fukui Daichi <a.dog.will.talk@akane.waseda.jp>  Sun, 22 Nov 2026 16:00:00 +0000
 

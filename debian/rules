@@ -17,6 +17,10 @@ override_dh_installexamples:
 	dh_installexamples -Xgitignore
 
 
+# Copy the sysroot built by dh_auto_build, as upstream's "install" target
+# does. Running "make install" would compile everything again, since all
+# objects depend on the phony "include_dirs" target.
 override_dh_auto_install:
-	dh_auto_install -- $(TOOLCHAIN) INSTALL_DIR=$(CURDIR)/debian/tmp/usr
+	mkdir -p $(CURDIR)/debian/tmp/usr
+	cp -r $(CURDIR)/sysroot/lib $(CURDIR)/sysroot/share $(CURDIR)/sysroot/include $(CURDIR)/debian/tmp/usr
 	find $(CURDIR)/debian/tmp/usr -type d -empty -delete
